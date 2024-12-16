@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SastImg.Client.ShellPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SastImg.Client"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    mc:Ignorable="d"
+    Background="Transparent">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="auto" />
+            <RowDefinition
+                Height="*" />
+        </Grid.RowDefinitions>
+
+        <NavigationView
+            Grid.Row="1"
+            IsSettingsVisible="False"
+            Style="{StaticResource MainNavigationViewStyle}">
+            <NavigationView.MenuItems>
+                <NavigationViewItem
+                    Content="主页"
+                    Icon="Home"
+                    Tag="Home" />
+            </NavigationView.MenuItems>
+            <NavigationView.FooterMenuItems>
+                <NavigationViewItem
+                    Content="GitHub 仓库"
+                    SelectsOnInvoked="False"
+                    Tag="GitHub">
+                    <NavigationViewItem.Icon>
+                        <ImageIcon
+                            Opacity="0.6"
+                            Source="{ThemeResource GitHubIconImage}" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem
+                    Content="设置"
+                    Icon="Setting"
+                    Tag="Settings" />
+            </NavigationView.FooterMenuItems>
+        </NavigationView>
+
+        <Grid>
+            <controls:TitleBar
+                Window="{x:Bind local:App.MainWindow}"
+                DisplayMode="Tall"
+                AutoConfigureCustomTitleBar="True"
+                Title="SAST Image"
+                IsBackButtonVisible="True"
+                IsPaneButtonVisible="False"
+                Subtitle="Dev">
+                <controls:TitleBar.Icon>
+                    <BitmapIcon
+                        ShowAsMonochrome="False"
+                        UriSource="ms-appx:///Assets/StoreLogo.png" />
+                </controls:TitleBar.Icon>
+                                    <controls:TitleBar.Footer>
+                        <PersonPicture Width="32"
+                                            Height="32"
+                                            Initials="C#"
+                                            ProfilePicture="ms-appx:///Assets/Icons/DefaultAvatar.png" />
+                    </controls:TitleBar.Footer>
+
+            </controls:TitleBar>
+
+        </Grid>
+    </Grid>
+</Page>

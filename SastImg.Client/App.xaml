@@ -7,10 +7,30 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+                <XamlControlsResources
+                    xmlns="using:Microsoft.UI.Xaml.Controls" />
+                <ResourceDictionary
+                    Source="/Styles/NavigationView.xaml" />
                 <!-- Other merged dictionaries here -->
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary
+                    x:Key="Light">
+                    <ImageSource
+                        x:Key="GitHubIconImage">ms-appx:///Assets/Icons/GitHub.light.svg</ImageSource>
+                </ResourceDictionary>
+                <ResourceDictionary
+                    x:Key="Dark">
+                    <ImageSource
+                        x:Key="GitHubIconImage">ms-appx:///Assets/Icons/GitHub.dark.svg</ImageSource>
+                </ResourceDictionary>
+                <ResourceDictionary
+                    x:Key="HighContrast">
+                    <ImageSource
+                        x:Key="GitHubIconImage">ms-appx:///Assets/Icons/GitHub.dark.svg</ImageSource>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
