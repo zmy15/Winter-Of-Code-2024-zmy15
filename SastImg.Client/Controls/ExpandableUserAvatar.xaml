@@ -16,6 +16,9 @@
 
     <UserControl.Resources>
         <labs:TransitionHelper
+            DefaultIndependentTranslation="30,-10"
+            IndependentElementShowDuration="0:0:0.5000"
+            IndependentElementShowDelay="0:0:0.0500"
             x:Name="MyTransitionHelper"
             x:Key="MyTransitionHelper">
             <labs:TransitionConfig
@@ -26,12 +29,10 @@
                 ScaleMode="Scale" />
             <labs:TransitionConfig
                 Id="text"
-                EnableClipAnimation="true"
-                ScaleMode="Scale" />
+                EnableClipAnimation="true"/>
             <labs:TransitionConfig
                 Id="content"
-                EnableClipAnimation="true"
-                ScaleMode="Scale" />
+                EnableClipAnimation="true"/>
         </labs:TransitionHelper>
     </UserControl.Resources>
 
