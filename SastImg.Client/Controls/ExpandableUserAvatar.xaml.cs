@@ -38,25 +38,35 @@ public sealed partial class ExpandableUserAvatar : UserControl
             Target = FirstControl,
             Transition = this.MyTransitionHelper,
         };
-        FirstControl.PointerEntered += (object sender, PointerRoutedEventArgs e) =>
+        FirstControl.PointerEntered += async (object sender, PointerRoutedEventArgs e) =>
         {
             Debug.WriteLine("FirstControl.PointerEntered");
             _startCts?.Dispose();
             _startCts = new CancellationTokenSource();
 
-            Task.Delay(700, _startCts.Token).ContinueWith((task) =>
+            await Task.Delay(600);
+            DispatcherQueue.TryEnqueue(( ) =>
+            {
+                SetTitleBarInteractivityArea();
+            });
+            try
+            {
+                await Task.Delay(100, _startCts.Token);
+            }
+            catch ( Exception )
+            { }
+            if ( !_startCts.Token.IsCancellationRequested )
             {
                 DispatcherQueue.TryEnqueue(( ) =>
                     {
-                        SetTitleBarInteractivityArea();
-                        if ( !_startCts.Token.IsCancellationRequested )
-                        {
-                            ResetTitleBarInteractivityArea();
-                            EndAction?.Execute(sender, new());
-                        }
-                    });
 
-            });
+
+                        ResetTitleBarInteractivityArea();
+                        EndAction?.Execute(sender, new());
+
+                    });
+            }
+
         };
 
         SecondControl.PointerEntered += (object sender, PointerRoutedEventArgs e) =>
