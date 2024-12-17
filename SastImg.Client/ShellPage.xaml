@@ -21,6 +21,7 @@
         <NavigationView
             Grid.Row="1"
             IsSettingsVisible="False"
+            ItemInvoked="NavigationView_ItemInvoked"
             Style="{StaticResource MainNavigationViewStyle}">
             <NavigationView.MenuItems>
                 <NavigationViewItem
