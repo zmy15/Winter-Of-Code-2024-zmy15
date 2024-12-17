@@ -7,6 +7,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:cc="using:SastImg.Client.Controls"
+    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:ui="using:CommunityToolkit.WinUI"
     mc:Ignorable="d"
     Background="Transparent">
 
@@ -49,8 +54,9 @@
                 x:Name="MainFrame" />
         </NavigationView>
 
-        <Grid>
+        <Grid ui:UIElementExtensions.ClipToBounds="False">
             <controls:TitleBar
+                ui:UIElementExtensions.ClipToBounds="False"
                 Window="{x:Bind local:App.MainWindow}"
                 DisplayMode="Tall"
                 AutoConfigureCustomTitleBar="True"
@@ -65,14 +71,11 @@
                         UriSource="ms-appx:///Assets/StoreLogo.png" />
                 </controls:TitleBar.Icon>
                 <controls:TitleBar.Footer>
-                    <PersonPicture
-                        Width="32"
-                        Height="32"
-                        Initials="C#"
-                        ProfilePicture="ms-appx:///Assets/Icons/DefaultAvatar.png" />
+                    <cc:ExpandableUserAvatar Width="32" Height="32"/>
                 </controls:TitleBar.Footer>
                 <controls:TitleBar.Content>
-                    <AutoSuggestBox PlaceholderText="Search" />
+                    <AutoSuggestBox
+                        PlaceholderText="Search" />
                 </controls:TitleBar.Content>
             </controls:TitleBar>
 

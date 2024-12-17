@@ -1,6 +1,7 @@
 ﻿using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
+using SastImg.Client.Helpers;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -26,6 +27,7 @@ public partial class App : Application
         MainWindow.AppWindow.TitleBar.ExtendsContentIntoTitleBar = true;
         MainWindow.AppWindow.TitleBar.ButtonBackgroundColor = Colors.Transparent;
         MainWindow.Activate();
+        WindowHelper.TrackWindow(MainWindow);
     }
 
     public static Window? MainWindow;

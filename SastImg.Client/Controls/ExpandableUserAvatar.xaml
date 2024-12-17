@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="SastImg.Client.Controls.ExpandableUserAvatar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SastImg.Client.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:labs="using:CommunityToolkit.Labs.WinUI"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:ui="using:CommunityToolkit.WinUI"
+    Background="Transparent"
+    ui:UIElementExtensions.ClipToBounds="False"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <labs:TransitionHelper
+            x:Name="MyTransitionHelper"
+            x:Key="MyTransitionHelper">
+            <labs:TransitionConfig
+                Id="background"
+                ScaleMode="Scale" />
+            <labs:TransitionConfig
+                Id="image"
+                ScaleMode="Scale" />
+            <labs:TransitionConfig
+                Id="text"
+                EnableClipAnimation="true"
+                ScaleMode="Scale" />
+            <labs:TransitionConfig
+                Id="content"
+                EnableClipAnimation="true"
+                ScaleMode="Scale" />
+        </labs:TransitionHelper>
+    </UserControl.Resources>
+
+    <Grid
+        ui:UIElementExtensions.ClipToBounds="False">
+        <Canvas Background="Transparent">
+            <Grid
+                Margin="-240,-5,0,0"
+                ui:UIElementExtensions.ClipToBounds="False"
+                x:Name="SecondControl"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Width="320"
+                Height="200"
+                Canvas.ZIndex="100"
+                Visibility="Collapsed">
+                <i:Interaction.Behaviors>
+                    <ic:EventTriggerBehavior
+                        EventName="PointerExited">
+                        <labs:StartTransitionAction
+                            Source="{x:Bind SecondControl}"
+                            Target="{x:Bind FirstControl}"
+                            Transition="{StaticResource MyTransitionHelper}" />
+                    </ic:EventTriggerBehavior>
+                </i:Interaction.Behaviors>
+                <Border
+                    labs:TransitionHelper.Id="background"
+                    Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource ControlElevationBorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="8" />
+                <Grid
+                    Margin="16"
+                    RowSpacing="16">
+                    <Grid.RowDefinitions>
+                        <RowDefinition
+                            Height="auto" />
+                        <RowDefinition
+                            Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid
+                        ColumnSpacing="16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition
+                                Width="auto" />
+                            <ColumnDefinition
+                                Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <PersonPicture
+                            Width="64"
+                            Height="64"
+                            labs:TransitionHelper.Id="image"
+                            Initials="C#" />
+                        <Grid
+                            Grid.Column="1"
+                            RowSpacing="4"
+                            labs:TransitionHelper.Id="text">
+                            <Grid.RowDefinitions>
+                                <RowDefinition
+                                    Height="3*" />
+                                <RowDefinition
+                                    Height="2*" />
+                            </Grid.RowDefinitions>
+                            <TextBlock
+                                VerticalAlignment="Bottom"
+                                Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"
+                                Text="C# Group WOC" />
+                            <TextBlock
+                                Grid.Row="1"
+                                VerticalAlignment="Top"
+                                Style="{ThemeResource CaptionTextBlockStyle}"
+                                Text="NJUPT-SAST-CSharp@github.com" />
+                        </Grid>
+                    </Grid>
+
+                    <StackPanel
+                        Orientation="Horizontal"
+                        labs:TransitionHelper.Id="content"
+                        Spacing="8"
+                        Grid.Row="1">
+                        <Button
+                            Content="更改头像" />
+                        <Button
+                            Content="更改用户名" />
+                        <Button
+                            Content="更改密码" />
+                    </StackPanel>
+                </Grid>
+
+            </Grid>
+
+        </Canvas>
+        <Grid
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center">
+
+            <Grid
+                x:Name="FirstControl"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top">
+                <i:Interaction.Behaviors>
+                    <ic:EventTriggerBehavior
+                        EventName="PointerMoved">
+                        <labs:StartTransitionAction
+                            Source="{x:Bind FirstControl}"
+                            Target="{x:Bind SecondControl}"
+                            Transition="{StaticResource MyTransitionHelper}" />
+                    </ic:EventTriggerBehavior>
+                </i:Interaction.Behaviors>
+                <Grid>
+                    <Border
+                        labs:TransitionHelper.Id="background"
+                    Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}"
+                        CornerRadius="16" />
+                    <PersonPicture
+                        Width="32"
+                        Height="32"
+                        labs:TransitionHelper.Id="image"
+                        Initials="C#" />
+                </Grid>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</UserControl>
