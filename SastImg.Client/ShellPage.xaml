@@ -44,6 +44,8 @@
                     Icon="Setting"
                     Tag="Settings" />
             </NavigationView.FooterMenuItems>
+            <Frame
+                x:Name="MainFrame" />
         </NavigationView>
 
         <Grid>
@@ -52,21 +54,25 @@
                 DisplayMode="Tall"
                 AutoConfigureCustomTitleBar="True"
                 Title="SAST Image"
-                IsBackButtonVisible="True"
+                IsBackButtonVisible="{x:Bind MainFrame.CanGoBack}"
                 IsPaneButtonVisible="False"
+                CompactStateBreakpoint="720"
                 Subtitle="Dev">
                 <controls:TitleBar.Icon>
                     <BitmapIcon
                         ShowAsMonochrome="False"
                         UriSource="ms-appx:///Assets/StoreLogo.png" />
                 </controls:TitleBar.Icon>
-                                    <controls:TitleBar.Footer>
-                        <PersonPicture Width="32"
-                                            Height="32"
-                                            Initials="C#"
-                                            ProfilePicture="ms-appx:///Assets/Icons/DefaultAvatar.png" />
-                    </controls:TitleBar.Footer>
-
+                <controls:TitleBar.Footer>
+                    <PersonPicture
+                        Width="32"
+                        Height="32"
+                        Initials="C#"
+                        ProfilePicture="ms-appx:///Assets/Icons/DefaultAvatar.png" />
+                </controls:TitleBar.Footer>
+                <controls:TitleBar.Content>
+                    <AutoSuggestBox PlaceholderText="Search" />
+                </controls:TitleBar.Content>
             </controls:TitleBar>
 
         </Grid>
