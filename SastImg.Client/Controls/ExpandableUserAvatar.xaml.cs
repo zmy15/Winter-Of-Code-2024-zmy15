@@ -25,6 +25,7 @@ public sealed partial class ExpandableUserAvatar : UserControl
     public ExpandableUserAvatar ( )
     {
         this.InitializeComponent();
+
         StartAction = new StartTransitionAction()
         {
             Source = FirstControl,
@@ -38,6 +39,7 @@ public sealed partial class ExpandableUserAvatar : UserControl
             Target = FirstControl,
             Transition = this.MyTransitionHelper,
         };
+
         FirstControl.PointerEntered += async (object sender, PointerRoutedEventArgs e) =>
         {
             Debug.WriteLine("FirstControl.PointerEntered");
@@ -58,15 +60,11 @@ public sealed partial class ExpandableUserAvatar : UserControl
             if ( !_startCts.Token.IsCancellationRequested )
             {
                 DispatcherQueue.TryEnqueue(( ) =>
-                    {
-
-
-                        ResetTitleBarInteractivityArea();
-                        EndAction?.Execute(sender, new());
-
-                    });
+                {
+                    ResetTitleBarInteractivityArea();
+                    EndAction?.Execute(sender, new());
+                });
             }
-
         };
 
         SecondControl.PointerEntered += (object sender, PointerRoutedEventArgs e) =>
@@ -94,11 +92,11 @@ public sealed partial class ExpandableUserAvatar : UserControl
 
             var scale = WindowHelper.GetRasterizationScaleForElement(App.MainWindow.Content);
             var transparentRect = new Windows.Graphics.RectInt32(
-    _X: (int)Math.Round(bounds.X * scale),
-    _Y: (int)Math.Round(bounds.Y * scale),
-    _Width: (int)Math.Round(bounds.Width * scale),
-    _Height: (int)Math.Round(bounds.Height * scale)
-);
+                _X: (int)Math.Round(bounds.X * scale),
+                _Y: (int)Math.Round(bounds.Y * scale),
+                _Width: (int)Math.Round(bounds.Width * scale),
+                _Height: (int)Math.Round(bounds.Height * scale)
+            );
             var old_rects = nonClientInputSrc.GetRegionRects(NonClientRegionKind.Passthrough);
             if ( FlyoutNonClientArea is not null )
             {
@@ -131,4 +129,42 @@ public sealed partial class ExpandableUserAvatar : UserControl
     }
 
     private static RectInt32? FlyoutNonClientArea;
+
+    #region Properties
+
+
+
+    public object FlyoutContent
+    {
+        get { return (object)GetValue(FlyoutContentProperty); }
+        set { SetValue(FlyoutContentProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for FlyoutContent.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty FlyoutContentProperty =
+    DependencyProperty.Register("ExpandedContent", typeof(object), typeof(ExpandableUserAvatar), new PropertyMetadata(null));
+
+    public string UserName
+    {
+        get { return (string)GetValue(UserNameProperty); }
+        set { SetValue(UserNameProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for UserName.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty UserNameProperty =
+        DependencyProperty.Register("UserName", typeof(string), typeof(ExpandableUserAvatar), new PropertyMetadata(null));
+
+    public string Email
+    {
+        get { return (string)GetValue(EmailProperty); }
+        set { SetValue(EmailProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for Email.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty EmailProperty =
+        DependencyProperty.Register("Email", typeof(string), typeof(ExpandableUserAvatar), new PropertyMetadata(null));
+
+
+
+    #endregion
 }

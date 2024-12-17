@@ -54,7 +54,8 @@
                 x:Name="MainFrame" />
         </NavigationView>
 
-        <Grid ui:UIElementExtensions.ClipToBounds="False">
+        <Grid
+            ui:UIElementExtensions.ClipToBounds="False">
             <controls:TitleBar
                 ui:UIElementExtensions.ClipToBounds="False"
                 Window="{x:Bind local:App.MainWindow}"
@@ -71,7 +72,24 @@
                         UriSource="ms-appx:///Assets/StoreLogo.png" />
                 </controls:TitleBar.Icon>
                 <controls:TitleBar.Footer>
-                    <cc:ExpandableUserAvatar Width="32" Height="32"/>
+                    <cc:ExpandableUserAvatar
+                        UserName="SAST C# Group"
+                        Email="NJUPT-SAST-CSharp@github.com"
+                        Width="32"
+                        Height="32">
+                        <cc:ExpandableUserAvatar.FlyoutContent>
+                            <StackPanel
+                                Orientation="Horizontal"
+                                Spacing="8">
+                                <Button
+                                    Content="更改头像" />
+                                <Button
+                                    Content="更改用户名" />
+                                <Button
+                                    Content="更改密码" />
+                            </StackPanel>
+                        </cc:ExpandableUserAvatar.FlyoutContent>
+                    </cc:ExpandableUserAvatar>
                 </controls:TitleBar.Footer>
                 <controls:TitleBar.Content>
                     <AutoSuggestBox

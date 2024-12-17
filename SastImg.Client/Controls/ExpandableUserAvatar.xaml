@@ -37,7 +37,8 @@
 
     <Grid
         ui:UIElementExtensions.ClipToBounds="False">
-        <Canvas Background="Transparent">
+        <Canvas
+            Background="Transparent">
             <Grid
                 Margin="-240,-5,0,0"
                 ui:UIElementExtensions.ClipToBounds="False"
@@ -84,7 +85,7 @@
                             Width="64"
                             Height="64"
                             labs:TransitionHelper.Id="image"
-                            Initials="C#" />
+                            DisplayName="{x:Bind UserName}" />
                         <Grid
                             Grid.Column="1"
                             RowSpacing="4"
@@ -98,27 +99,21 @@
                             <TextBlock
                                 VerticalAlignment="Bottom"
                                 Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"
-                                Text="C# Group WOC" />
+                                Text="{x:Bind UserName}" />
                             <TextBlock
                                 Grid.Row="1"
                                 VerticalAlignment="Top"
                                 Style="{ThemeResource CaptionTextBlockStyle}"
-                                Text="NJUPT-SAST-CSharp@github.com" />
+                                Text="{x:Bind Email}" />
                         </Grid>
                     </Grid>
 
-                    <StackPanel
-                        Orientation="Horizontal"
+                    <Grid
                         labs:TransitionHelper.Id="content"
-                        Spacing="8"
                         Grid.Row="1">
-                        <Button
-                            Content="更改头像" />
-                        <Button
-                            Content="更改用户名" />
-                        <Button
-                            Content="更改密码" />
-                    </StackPanel>
+                        <ContentPresenter
+                            Content="{x:Bind FlyoutContent}" />
+                    </Grid>
                 </Grid>
 
             </Grid>
@@ -144,13 +139,13 @@
                 <Grid>
                     <Border
                         labs:TransitionHelper.Id="background"
-                    Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}"
+                        Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}"
                         CornerRadius="16" />
                     <PersonPicture
                         Width="32"
                         Height="32"
                         labs:TransitionHelper.Id="image"
-                        Initials="C#" />
+                        DisplayName="{x:Bind UserName}" />
                 </Grid>
             </Grid>
 
