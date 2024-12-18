@@ -10,6 +10,11 @@
     Background="Transparent">
 
     <Grid>
+        <StackPanel>
         <TextBlock Text="SAST Image" Style="{ThemeResource TitleLargeTextBlockStyle}" />
+            <Button x:Name="LoginButton" Click="Button_Click">
+                Try Login
+            </Button>
+        </StackPanel>
     </Grid>
 </Page>

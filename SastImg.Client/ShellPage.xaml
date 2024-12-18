@@ -92,6 +92,16 @@
                                 </cc:IconButton>
                                 <cc:IconButton
                                     Style="{StaticResource TransparentIconButtonStyle}"
+                                    HorizontalAlignment="Stretch"
+                                    Command="{x:Bind LoginCommand}">
+                                    <cc:IconButton.Icon>
+                                        <FontIcon
+                                            Glyph="&#xE8A6;" />
+                                    </cc:IconButton.Icon>
+                                    登录
+                                </cc:IconButton>
+                                <cc:IconButton
+                                    Style="{StaticResource TransparentIconButtonStyle}"
                                     Foreground="{ThemeResource SystemFillColorCriticalBrush}"
                                     HorizontalAlignment="Stretch">
                                     <cc:IconButton.Icon>

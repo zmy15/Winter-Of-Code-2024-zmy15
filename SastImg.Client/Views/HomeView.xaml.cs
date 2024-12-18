@@ -15,4 +15,14 @@ public sealed partial class HomeView : Page
         ViewModel = new HomeViewModel();
         this.InitializeComponent();
     }
+
+    private async void Button_Click (object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        LoginButton.Content = "Try Logging...";
+        if ( App.API is { } api )
+        {
+            var result = await api.Login(new() { Username = "shirasagi", Password = "123456" });
+            LoginButton.Content = result.Token;
+        }
+    }
 }

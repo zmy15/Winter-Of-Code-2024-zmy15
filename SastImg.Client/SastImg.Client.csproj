@@ -17,10 +17,6 @@
 
     <ItemGroup>
         <Content Include="Assets\**" />
-        <None Remove="Controls\ExpandableUserAvatar.xaml" />
-        <None Remove="Themes\Styles\TransparentIconButton.xaml" />
-        <None Remove="Views\HomeView.xaml" />
-        <None Remove="Views\SettingsView.xaml" />
         <Manifest Include="$(ApplicationManifest)" />
         <ProjectCapability Include="Msix" />
         <PackageReference Include="CommunityToolkit.Labs.WinUI.TitleBar" Version="0.0.1-build.1830" />
@@ -38,17 +34,5 @@
         <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.241114003" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
         <PackageReference Include="Refit" Version="8.0.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Page Update="Themes\Styles\TransparentIconButton.xaml">
-        <Generator>MSBuild:Compile</Generator>
-      </Page>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Page Update="Controls\ExpandableUserAvatar.xaml">
-        <Generator>MSBuild:Compile</Generator>
-      </Page>
     </ItemGroup>
 </Project>

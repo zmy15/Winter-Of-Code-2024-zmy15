@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentDialog
+    x:Class="SastImg.Client.Views.Dialogs.LoginDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SastImg.Client.Views.Dialogs"
+    xmlns:app="using:SastImg.Client"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helper="using:SastImg.Client.Helpers"
+    mc:Ignorable="d"
+    Style="{ThemeResource DefaultContentDialogStyle}"
+    Title="登录"
+    CloseButtonText="取消"
+    PrimaryButtonText="登录"
+    IsPrimaryButtonEnabled="{x:Bind helper:BindHelper.Not(IsLoggingIn), Mode=OneWay}">
+
+    <StackPanel Spacing="12">
+        <TextBox
+            IsEnabled="{x:Bind helper:BindHelper.Not(IsLoggingIn), Mode=OneWay}"
+            Text="{x:Bind Username, Mode=TwoWay}"
+            PlaceholderText="用户名" />
+        <TextBox
+            IsEnabled="{x:Bind helper:BindHelper.Not(IsLoggingIn), Mode=OneWay}"
+            Text="{x:Bind Password, Mode=TwoWay}"
+            PlaceholderText="密码" />
+        <TextBlock
+            Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemFillColorCriticalBrush}" Text="登录错误，请重试" Visibility="{x:Bind IsLoginFailed, Mode=OneWay}" />
+    </StackPanel>
+</ContentDialog>

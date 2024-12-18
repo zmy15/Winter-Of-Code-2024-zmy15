@@ -1,6 +1,9 @@
 using System;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml.Controls;
 using SastImg.Client.Views;
+using SastImg.Client.Views.Dialogs;
 using Windows.System;
 
 namespace SastImg.Client;
@@ -30,4 +33,10 @@ public sealed partial class ShellPage : Page
             }
         };
     }
+
+    private ICommand LoginCommand => new RelayCommand(async ( ) =>
+    {
+        var dialog = new LoginDialog();
+        await dialog.ShowAsync();
+    });
 }

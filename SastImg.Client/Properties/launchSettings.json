@@ -2,7 +2,7 @@
   "profiles": {
     "SastImg.Client (Package)": {
       "commandName": "MsixPackage",
-      "nativeDebugging": true
+      "nativeDebugging": false
     },
     "SastImg.Client (Unpackaged)": {
       "commandName": "Project"
