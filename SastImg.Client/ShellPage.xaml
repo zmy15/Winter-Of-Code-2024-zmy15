@@ -79,14 +79,36 @@
                         Height="32">
                         <cc:ExpandableUserAvatar.FlyoutContent>
                             <StackPanel
-                                Orientation="Horizontal"
+                                Orientation="Vertical"
                                 Spacing="8">
-                                <Button
-                                    Content="更改头像" />
-                                <Button
-                                    Content="更改用户名" />
-                                <Button
-                                    Content="更改密码" />
+                                <cc:IconButton
+                                    Style="{StaticResource TransparentIconButtonStyle}"
+                                    IsEnabled="True">
+                                    <cc:IconButton.Icon>
+                                        <FontIcon
+                                            Glyph="&#xE8A6;" />
+                                    </cc:IconButton.Icon>
+                                    更改头像
+                                </cc:IconButton>
+                                <cc:IconButton
+                                    Style="{StaticResource TransparentIconButtonStyle}"
+                                    IsEnabled="True">
+                                    <cc:IconButton.Icon>
+                                        <FontIcon
+                                            Glyph="&#xE8A6;" />
+                                    </cc:IconButton.Icon>
+                                    更改用户名
+                                </cc:IconButton>
+                                <cc:IconButton
+                                    Style="{StaticResource TransparentIconButtonStyle}"
+                                    IsEnabled="True">
+                                    <cc:IconButton.Icon>
+                                        <FontIcon
+                                            Glyph="&#xE8A6;" />
+                                    </cc:IconButton.Icon>
+                                    更改密码
+                                </cc:IconButton>
+
                             </StackPanel>
                         </cc:ExpandableUserAvatar.FlyoutContent>
                     </cc:ExpandableUserAvatar>

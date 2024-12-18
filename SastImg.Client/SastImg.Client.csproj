@@ -18,6 +18,7 @@
     <ItemGroup>
         <Content Include="Assets\**" />
         <None Remove="Controls\ExpandableUserAvatar.xaml" />
+        <None Remove="Themes\Styles\TransparentIconButton.xaml" />
         <None Remove="Views\HomeView.xaml" />
         <None Remove="Views\SettingsView.xaml" />
         <Manifest Include="$(ApplicationManifest)" />
@@ -36,6 +37,12 @@
         <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
         <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.241114003" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Update="Themes\Styles\TransparentIconButton.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
     </ItemGroup>
 
     <ItemGroup>
