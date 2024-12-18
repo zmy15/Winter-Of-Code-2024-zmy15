@@ -46,14 +46,14 @@ public sealed partial class ExpandableUserAvatar : UserControl
             _startCts?.Dispose();
             _startCts = new CancellationTokenSource();
 
-            await Task.Delay(600);
+            await Task.Delay(650);
             DispatcherQueue.TryEnqueue(( ) =>
             {
                 SetTitleBarInteractivityArea();
             });
             try
             {
-                await Task.Delay(100, _startCts.Token);
+                await Task.Delay(150, _startCts.Token);
             }
             catch ( Exception )
             { }

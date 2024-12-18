@@ -41,7 +41,7 @@
         <Canvas
             Background="Transparent">
             <Grid
-                Margin="-240,-5,0,0"
+                Margin="-240,0,0,0"
                 ui:UIElementExtensions.ClipToBounds="False"
                 x:Name="SecondControl"
                 VerticalAlignment="Top"
