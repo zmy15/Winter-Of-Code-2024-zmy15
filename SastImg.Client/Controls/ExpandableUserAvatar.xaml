@@ -28,11 +28,9 @@
                 Id="image"
                 ScaleMode="Scale" />
             <labs:TransitionConfig
-                Id="text"
-                EnableClipAnimation="true"/>
+                Id="text"/>
             <labs:TransitionConfig
-                Id="content"
-                EnableClipAnimation="true"/>
+                Id="content"/>
         </labs:TransitionHelper>
     </UserControl.Resources>
 
