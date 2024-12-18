@@ -1,6 +1,8 @@
-﻿using Microsoft.UI;
+﻿using GeneratedCode;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
+using Refit;
 using SastImg.Client.Helpers;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -13,6 +15,7 @@ public partial class App : Application
     public App ( )
     {
         this.InitializeComponent();
+        API = RestService.For<ISastImgAPI>("http://localhost:5265/");
     }
 
     protected override void OnLaunched (Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
@@ -31,4 +34,5 @@ public partial class App : Application
     }
 
     public static Window? MainWindow;
+    public static ISastImgAPI? API;
 }

@@ -15,15 +15,17 @@ namespace GeneratedCode
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.4.1.0")]
     public partial interface ISastImgAPI
     {
-        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Post("/api/account/register")]
-        Task Register([Body] RegisterRequest body);
+        Task<AuthenticationResponse> Register([Body] RegisterRequest body);
 
-        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Post("/api/account/login")]
-        Task Login([Body] LoginRequest body);
+        Task<AuthenticationResponse> Login([Body] LoginRequest body);
 
         /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
@@ -221,6 +223,25 @@ namespace GeneratedCode
     using System = global::System;
 
     
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class AuthenticationResponse
+    {
+
+        [JsonPropertyName("token")]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Token { get; set; }
+
+        private IDictionary<string, object> _additionalProperties;
+
+        [JsonExtensionData]
+        public IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CreateAlbumRequest
