@@ -80,33 +80,25 @@
                         <cc:ExpandableUserAvatar.FlyoutContent>
                             <StackPanel
                                 Orientation="Vertical"
-                                Spacing="8">
+                                Spacing="4">
                                 <cc:IconButton
                                     Style="{StaticResource TransparentIconButtonStyle}"
-                                    IsEnabled="True">
+                                    HorizontalAlignment="Stretch">
                                     <cc:IconButton.Icon>
                                         <FontIcon
                                             Glyph="&#xE8A6;" />
                                     </cc:IconButton.Icon>
-                                    更改头像
+                                    查看资料
                                 </cc:IconButton>
                                 <cc:IconButton
                                     Style="{StaticResource TransparentIconButtonStyle}"
-                                    IsEnabled="True">
+                                    Foreground="{ThemeResource SystemFillColorCriticalBrush}"
+                                    HorizontalAlignment="Stretch">
                                     <cc:IconButton.Icon>
                                         <FontIcon
                                             Glyph="&#xE8A6;" />
                                     </cc:IconButton.Icon>
-                                    更改用户名
-                                </cc:IconButton>
-                                <cc:IconButton
-                                    Style="{StaticResource TransparentIconButtonStyle}"
-                                    IsEnabled="True">
-                                    <cc:IconButton.Icon>
-                                        <FontIcon
-                                            Glyph="&#xE8A6;" />
-                                    </cc:IconButton.Icon>
-                                    更改密码
+                                    退出登录
                                 </cc:IconButton>
 
                             </StackPanel>

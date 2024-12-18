@@ -165,6 +165,10 @@
                         </Grid.Resources>
 
                         <Button
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                            HorizontalContentAlignment="Left"
+                            Foreground="{TemplateBinding Foreground}"
                             Command="{TemplateBinding Command}"
                             Padding="16,12">
                             <StackPanel

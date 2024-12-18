@@ -46,8 +46,6 @@
                 x:Name="SecondControl"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Left"
-                Width="320"
-                Height="200"
                 Canvas.ZIndex="100"
                 Visibility="Collapsed">
                 <i:Interaction.Behaviors>
