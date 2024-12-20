@@ -14,6 +14,7 @@ public partial class App : Application
 {
     public App ( )
     {
+        DebugSettings.EnableFrameRateCounter = true;
         this.InitializeComponent();
         API = RestService.For<ISastImgAPI>("http://localhost:5265/");
     }

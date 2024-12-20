@@ -50,6 +50,7 @@ public sealed partial class LoginDialog : ContentDialog
             AuthenticationResponse? token = null;
             if ( App.API is { } api )
                 token = await api.Login(new() { Username = Username, Password = Password });
+
             if ( token is { } t )
             {
                 this.Closed += (ContentDialog sender, ContentDialogClosedEventArgs args) =>

@@ -15,6 +15,8 @@ namespace GeneratedCode
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.4.1.0")]
     public partial interface ISastImgAPI
     {
+
+        #region Authentication
         /// <returns>OK</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: text/plain, application/json, text/json")]
@@ -37,10 +39,13 @@ namespace GeneratedCode
         [Post("/api/account/reset/username")]
         Task Username([Body] ResetUsernameRequest body);
 
+
         /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Get("/api/account/username/check")]
         Task Check([Query] string username);
+
+    #endregion
 
         /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
