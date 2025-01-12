@@ -1,9 +1,8 @@
 using System;
 using Microsoft.UI.Xaml.Controls;
-using SastImg.Client.Views;
 using Windows.System;
 
-namespace SastImg.Client;
+namespace SastImg.Client.Views;
 public sealed partial class ShellPage : Page
 {
     private ShellPageViewModel vm = new();

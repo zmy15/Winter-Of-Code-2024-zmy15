@@ -1,20 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Page
     x:Class="SastImg.Client.Views.HomeView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:SastImg.Client.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:SastImg.Client.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="Transparent">
+    Background="Transparent"
+    mc:Ignorable="d">
 
     <Grid>
         <StackPanel>
-        <TextBlock Text="SAST Image" Style="{ThemeResource TitleLargeTextBlockStyle}" />
-            <Button x:Name="LoginButton" Click="Button_Click">
-                Try Login
-            </Button>
+            <TextBlock Style="{ThemeResource TitleLargeTextBlockStyle}" Text="SAST Image" />
         </StackPanel>
     </Grid>
 </Page>

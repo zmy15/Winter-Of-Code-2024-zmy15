@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Media;
 using Refit;
 using SastImg.Client.Helpers;
 using SastImg.Client.Services;
+using SastImg.Client.Views;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -17,7 +18,7 @@ public partial class App : Application
     public App ( )
     {
         this.InitializeComponent();
-        API = RestService.For<ISastImgAPI>("http://localhost:5265/", new() { AuthorizationHeaderValueGetter = (_, _) => Task.FromResult(AuthService.Token ?? "") });
+        API = RestService.For<ISastImgAPI>("http://sastwoc2024.shirasagi.space:5265/", new() { AuthorizationHeaderValueGetter = (_, _) => Task.FromResult(AuthService.Token ?? "") });
     }
 
     protected override void OnLaunched (Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
