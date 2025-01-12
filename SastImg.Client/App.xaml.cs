@@ -1,9 +1,11 @@
-﻿using GeneratedCode;
+﻿using System.Threading.Tasks;
+using GeneratedCode;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using Refit;
 using SastImg.Client.Helpers;
+using SastImg.Client.Services;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -14,9 +16,8 @@ public partial class App : Application
 {
     public App ( )
     {
-        DebugSettings.EnableFrameRateCounter = true;
         this.InitializeComponent();
-        API = RestService.For<ISastImgAPI>("http://localhost:5265/");
+        API = RestService.For<ISastImgAPI>("http://localhost:5265/", new() { AuthorizationHeaderValueGetter = (_, _) => Task.FromResult(AuthService.Token ?? "") });
     }
 
     protected override void OnLaunched (Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
@@ -36,4 +37,5 @@ public partial class App : Application
 
     public static Window? MainWindow;
     public static ISastImgAPI? API;
+    public static AuthService AuthService = new();
 }

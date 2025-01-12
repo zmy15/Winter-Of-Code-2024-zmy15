@@ -1,6 +1,5 @@
 using System.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
-using GeneratedCode;
 using Microsoft.UI.Xaml.Controls;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -47,12 +46,9 @@ public sealed partial class LoginDialog : ContentDialog
         IsLoginFailed = false;
         try
         {
-            AuthenticationResponse? token = null;
-            if ( App.API is { } api )
-                token = await api.Login(new() { Username = Username, Password = Password });
-
-            if ( token is { } t )
+            if ( await App.AuthService.LoginAsync(Username, Password) )
             {
+                // 对话框关闭后显示登陆成功弹窗
                 this.Closed += (ContentDialog sender, ContentDialogClosedEventArgs args) =>
                 {
                     if ( args.Result is not ContentDialogResult.Primary )
@@ -61,8 +57,23 @@ public sealed partial class LoginDialog : ContentDialog
                     {
                         XamlRoot = this.XamlRoot,
                         Title="登录成功",
-                        CloseButtonText="确定",
-                        Content = new TextBlock() { Text = t.Token }
+                        CloseButtonText="确定"
+                    };
+                    var _ = successDialog.ShowAsync();
+                };
+            }
+            else
+            {
+                // 对话框关闭后显示登陆失败弹窗
+                this.Closed += (ContentDialog sender, ContentDialogClosedEventArgs args) =>
+                {
+                    if ( args.Result is not ContentDialogResult.Primary )
+                        return;
+                    var successDialog = new ContentDialog()
+                    {
+                        XamlRoot = this.XamlRoot,
+                        Title="登录失败",
+                        CloseButtonText="确定"
                     };
                     var _ = successDialog.ShowAsync();
                 };
