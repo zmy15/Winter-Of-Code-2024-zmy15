@@ -109,8 +109,9 @@ namespace SastImg.Client.Service.API
         /// </item>
         /// </list>
         /// </returns>
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/images")]
-        Task<IApiResponse> Images([Query] long? uploader, [Query] long? album, [Query] int? page, CancellationToken cancellationToken = default);
+        Task<IApiResponse<ICollection<ImageDto>>> ImagesAll([Query] long? uploader, [Query] long? album, [Query] int? page, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -125,8 +126,9 @@ namespace SastImg.Client.Service.API
         /// </item>
         /// </list>
         /// </returns>
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/images/{id}")]
-        Task<IApiResponse> Images2(long id, [Query] int? kind, CancellationToken cancellationToken = default);
+        Task<IApiResponse<ImageDto>> Images(long id, [Query] int? kind, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -141,8 +143,9 @@ namespace SastImg.Client.Service.API
         /// </item>
         /// </list>
         /// </returns>
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/images/{id}/info")]
-        Task<IApiResponse> Info(long id, CancellationToken cancellationToken = default);
+        Task<IApiResponse<DetailedImage>> Info(long id, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -157,8 +160,9 @@ namespace SastImg.Client.Service.API
         /// </item>
         /// </list>
         /// </returns>
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/albums/{albumId}/images/removed")]
-        Task<IApiResponse> Removed2(long albumId, CancellationToken cancellationToken = default);
+        Task<IApiResponse<ICollection<ImageDto>>> Removed2(long albumId, CancellationToken cancellationToken = default);
     }
 
 }

@@ -30,7 +30,7 @@ namespace SastImg.Client.Service.API
         /// </list>
         /// </returns>
         [Post("/api/categories")]
-        Task<IApiResponse> CategoriesPOST([Body] CreateCategoryRequest body, CancellationToken cancellationToken = default);
+        Task<IApiResponse> Categories([Body] CreateCategoryRequest body, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -45,8 +45,9 @@ namespace SastImg.Client.Service.API
         /// </item>
         /// </list>
         /// </returns>
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/categories")]
-        Task<IApiResponse> CategoriesGET(CancellationToken cancellationToken = default);
+        Task<IApiResponse<ICollection<CategoryDto>>> CategoriesAll(CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:

@@ -45,8 +45,9 @@ namespace SastImg.Client.Service.API
         /// </item>
         /// </list>
         /// </returns>
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/tags")]
-        Task<IApiResponse> TagsGET([Query] string name, CancellationToken cancellationToken = default);
+        Task<IApiResponse<ICollection<TagDto>>> TagsAll([Query] string name, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:

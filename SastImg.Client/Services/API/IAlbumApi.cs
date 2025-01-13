@@ -53,8 +53,9 @@ namespace SastImg.Client.Service.API
         /// </item>
         /// </list>
         /// </returns>
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/albums")]
-        Task<IApiResponse> AlbumsGET([Query] long? category, [Query] long? author, [Query] string title, CancellationToken cancellationToken = default);
+        Task<IApiResponse<ICollection<AlbumDto>>> AlbumsAll([Query] long? category, [Query] long? author, [Query] string title, CancellationToken cancellationToken = default);
 
         /// <summary>RemoveAlbum</summary>
         /// <remarks>
@@ -259,8 +260,9 @@ namespace SastImg.Client.Service.API
         /// </item>
         /// </list>
         /// </returns>
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/albums/{id}/cover")]
-        Task<IApiResponse> CoverGET(long id, CancellationToken cancellationToken = default);
+        Task<IApiResponse<FileStreamResult>> CoverGET(long id, CancellationToken cancellationToken = default);
 
         /// <summary>Subscribe</summary>
         /// <returns>
@@ -308,8 +310,9 @@ namespace SastImg.Client.Service.API
         /// </item>
         /// </list>
         /// </returns>
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/albums/{id}")]
-        Task<IApiResponse> AlbumsGET2(long id, CancellationToken cancellationToken = default);
+        Task<IApiResponse<DetailedAlbum>> AlbumsGET(long id, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -324,8 +327,9 @@ namespace SastImg.Client.Service.API
         /// </item>
         /// </list>
         /// </returns>
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/albums/removed")]
-        Task<IApiResponse> Removed(CancellationToken cancellationToken = default);
+        Task<IApiResponse<ICollection<RemovedAlbumDto>>> Removed(CancellationToken cancellationToken = default);
     }
 
 }

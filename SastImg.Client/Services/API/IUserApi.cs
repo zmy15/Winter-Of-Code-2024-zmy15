@@ -79,8 +79,9 @@ namespace SastImg.Client.Service.API
         /// </item>
         /// </list>
         /// </returns>
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/users/{id}/avatar")]
-        Task<IApiResponse> AvatarGET(long id, CancellationToken cancellationToken = default);
+        Task<IApiResponse<FileStreamResult>> AvatarGET(long id, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -95,8 +96,9 @@ namespace SastImg.Client.Service.API
         /// </item>
         /// </list>
         /// </returns>
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/users/{id}/header")]
-        Task<IApiResponse> HeaderGET(long id, CancellationToken cancellationToken = default);
+        Task<IApiResponse<FileStreamResult>> HeaderGET(long id, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -111,8 +113,9 @@ namespace SastImg.Client.Service.API
         /// </item>
         /// </list>
         /// </returns>
+        [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/users/{id}/profile")]
-        Task<IApiResponse> Profile(long id, CancellationToken cancellationToken = default);
+        Task<IApiResponse<UserProfileDto>> Profile(long id, CancellationToken cancellationToken = default);
     }
 
 }
