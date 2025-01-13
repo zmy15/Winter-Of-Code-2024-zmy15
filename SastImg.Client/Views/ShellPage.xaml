@@ -6,6 +6,7 @@
     xmlns:cc="using:SastImg.Client.Controls"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:helper="using:SastImg.Client.Helpers"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
     xmlns:labs="using:CommunityToolkit.Labs.WinUI"
@@ -83,7 +84,8 @@
                                 <cc:IconButton
                                     HorizontalAlignment="Stretch"
                                     Command="{x:Bind vm.LoginCommand}"
-                                    Style="{StaticResource TransparentIconButtonStyle}">
+                                    Style="{StaticResource TransparentIconButtonStyle}"
+                                    Visibility="{x:Bind helper:BindHelper.BoolToVisibility(vm.IsLoggedIn, x:True), Mode=OneWay}">
                                     <cc:IconButton.Icon>
                                         <FontIcon Glyph="&#xE8A6;" />
                                     </cc:IconButton.Icon>
@@ -93,7 +95,8 @@
                                     HorizontalAlignment="Stretch"
                                     Command="{x:Bind vm.LogoutCommand}"
                                     Foreground="{ThemeResource SystemFillColorCriticalBrush}"
-                                    Style="{StaticResource TransparentIconButtonStyle}">
+                                    Style="{StaticResource TransparentIconButtonStyle}"
+                                    Visibility="{x:Bind vm.IsLoggedIn, Mode=OneWay}">
                                     <cc:IconButton.Icon>
                                         <FontIcon Glyph="&#xE8A6;" />
                                     </cc:IconButton.Icon>
