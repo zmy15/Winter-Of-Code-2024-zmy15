@@ -6,6 +6,11 @@ using Refit;
 using SastImg.Client.Service.API;
 
 namespace SastImg.Client.Services;
+
+/// <summary>
+/// SAST Image的API。执行所有操作都可以通过这个类来进行。
+/// 包含多个属性，每个属性对应一组API。
+/// </summary>
 public class SastImgAPI
 {
     public IAccountApi Account { get; private set; }
