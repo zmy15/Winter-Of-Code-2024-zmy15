@@ -23,6 +23,7 @@
         </Grid.RowDefinitions>
 
         <NavigationView
+            x:Name="NavView"
             Grid.Row="1"
             IsSettingsVisible="False"
             ItemInvoked="NavigationView_ItemInvoked"
@@ -57,7 +58,7 @@
                 AutoConfigureCustomTitleBar="True"
                 CompactStateBreakpoint="720"
                 DisplayMode="Tall"
-                IsBackButtonVisible="{x:Bind MainFrame.CanGoBack}"
+                IsBackButtonVisible="{x:Bind MainFrame.CanGoBack, Mode=OneWay}"
                 IsPaneButtonVisible="False"
                 Subtitle="Dev"
                 Window="{x:Bind local:App.MainWindow}">

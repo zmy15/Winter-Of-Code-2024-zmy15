@@ -10,6 +10,10 @@ public sealed partial class ShellPage : Page
     public ShellPage ( )
     {
         this.InitializeComponent();
+
+        // 首先显示首页
+        MainFrame.Navigate(typeof(HomeView));
+        NavView.SelectedItem = NavView.MenuItems[0];
     }
 
     private async void NavigationView_ItemInvoked (NavigationView sender, NavigationViewItemInvokedEventArgs args)
@@ -30,4 +34,5 @@ public sealed partial class ShellPage : Page
             }
         };
     }
+
 }

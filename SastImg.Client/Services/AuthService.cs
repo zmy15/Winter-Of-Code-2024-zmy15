@@ -27,8 +27,14 @@ public class AuthService ( )
 
         try
         {
-            var result = await App.API!.Login(new() { Username = username, Password = password });
-            _token = result.Token;
+            var result = await App.API!.Account.Login(new() { Username = username, Password = password });
+
+            if ( result.IsSuccessStatusCode == false )
+                return false;
+            if ( result.Content?.Token == null )
+                return false;
+
+            _token = result.Content?.Token;
             _username = username;
             _isLoggedIn = true;
             LoginStateChanged?.Invoke(true, username); // 触发登陆成功事件
