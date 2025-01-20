@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Net.Http;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Refit;
@@ -22,15 +24,28 @@ public class SastImgAPI
 
     public SastImgAPI (string endpointUrl)
     {
-        Account = RestService.For<IAccountApi>("http://sastwoc2024.shirasagi.space:5265/", new() { AuthorizationHeaderValueGetter = GetToken() });
-        Image = RestService.For<IImageApi>("http://sastwoc2024.shirasagi.space:5265/", new() { AuthorizationHeaderValueGetter = GetToken() });
-        Album = RestService.For<IAlbumApi>("http://sastwoc2024.shirasagi.space:5265/", new() { AuthorizationHeaderValueGetter = GetToken() });
-        Category = RestService.For<ICategoryApi>("http://sastwoc2024.shirasagi.space:5265/", new() { AuthorizationHeaderValueGetter = GetToken() });
-        Tag = RestService.For<ITagApi>("http://sastwoc2024.shirasagi.space:5265/", new() { AuthorizationHeaderValueGetter = GetToken() });
-        User = RestService.For<IUserApi>("http://sastwoc2024.shirasagi.space:5265/", new() { AuthorizationHeaderValueGetter = GetToken() });
+
+        var jsonSerializerOptions = new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            NumberHandling = JsonNumberHandling.WriteAsString
+        };
+
+        var refitSettings = new RefitSettings
+        {
+            AuthorizationHeaderValueGetter = GetToken(),
+            ContentSerializer = new SystemTextJsonContentSerializer(jsonSerializerOptions)
+        };
+
+        Account = RestService.For<IAccountApi>("http://sastwoc2024.shirasagi.space:5265/", refitSettings);
+        Image = RestService.For<IImageApi>("http://sastwoc2024.shirasagi.space:5265/", refitSettings);
+        Album = RestService.For<IAlbumApi>("http://sastwoc2024.shirasagi.space:5265/", refitSettings);
+        Category = RestService.For<ICategoryApi>("http://sastwoc2024.shirasagi.space:5265/", refitSettings);
+        Tag = RestService.For<ITagApi>("http://sastwoc2024.shirasagi.space:5265/", refitSettings);
+        User = RestService.For<IUserApi>("http://sastwoc2024.shirasagi.space:5265/", refitSettings);
     }
 
-    private static Func<HttpRequestMessage, CancellationToken, Task<string>> GetToken ( )
+    private static Func<HttpRequestMessage, CancellationToken, Task<string>> GetToken()
     {
         return (_, _) => Task.FromResult(App.AuthService.Token ?? "");
     }

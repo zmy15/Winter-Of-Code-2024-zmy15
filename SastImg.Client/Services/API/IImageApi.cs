@@ -8,12 +8,14 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using SastImg.Client.Service.API;
 
 #nullable enable annotations
 
 namespace SastImg.Client.Service.API
 {
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.4.1.0")]
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.5.0.0")]
+    [Headers("Authorization: Bearer")]
     public partial interface IImageApi
     {
         /// <returns>
@@ -29,8 +31,9 @@ namespace SastImg.Client.Service.API
         /// </item>
         /// </list>
         /// </returns>
+        [Multipart]
         [Post("/api/albums/{albumId}/add")]
-        Task<IApiResponse> Add(long albumId, [Body] Body2 body, CancellationToken cancellationToken = default);
+        Task<IApiResponse> AddImageAsync(long albumId, [Query, AliasAs("Title")] string title, [Query(CollectionFormat.Multi), AliasAs("Tags")] IEnumerable<long> tags, StreamPart image, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -46,7 +49,7 @@ namespace SastImg.Client.Service.API
         /// </list>
         /// </returns>
         [Post("/api/albums/{albumId}/images/{imageId}/remove")]
-        Task<IApiResponse> Remove2(long albumId, long imageId, CancellationToken cancellationToken = default);
+        Task<IApiResponse> RemoveImageAsync(long albumId, long imageId, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -62,7 +65,7 @@ namespace SastImg.Client.Service.API
         /// </list>
         /// </returns>
         [Post("/api/albums/{albumId}/images/{imageId}/restore")]
-        Task<IApiResponse> Restore2(long albumId, long imageId, CancellationToken cancellationToken = default);
+        Task<IApiResponse> RestoreImageAsync(long albumId, long imageId, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -78,7 +81,7 @@ namespace SastImg.Client.Service.API
         /// </list>
         /// </returns>
         [Post("/api/albums/{albumId}/images/{imageId}/like")]
-        Task<IApiResponse> Like(long albumId, long imageId, CancellationToken cancellationToken = default);
+        Task<IApiResponse> LikeImageAsync(long albumId, long imageId, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -94,7 +97,7 @@ namespace SastImg.Client.Service.API
         /// </list>
         /// </returns>
         [Post("/api/albums/{albumId}/images/{imageId}/unlike")]
-        Task<IApiResponse> Unlike(long albumId, long imageId, CancellationToken cancellationToken = default);
+        Task<IApiResponse> UnlikeImageAsync(long albumId, long imageId, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -111,7 +114,7 @@ namespace SastImg.Client.Service.API
         /// </returns>
         [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/images")]
-        Task<IApiResponse<ICollection<ImageDto>>> ImagesAll([Query] long? uploader, [Query] long? album, [Query] int? page, CancellationToken cancellationToken = default);
+        Task<IApiResponse<ICollection<ImageDto>>> GetImagesAsync([Query] long? uploader, [Query] long? album, [Query] int? page, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -128,7 +131,7 @@ namespace SastImg.Client.Service.API
         /// </returns>
         [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/images/{id}")]
-        Task<IApiResponse<ImageDto>> Images(long id, [Query] int? kind, CancellationToken cancellationToken = default);
+        Task<IApiResponse<FileResponse>> GetImageAsync(long id, [Query] int? kind, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -145,7 +148,7 @@ namespace SastImg.Client.Service.API
         /// </returns>
         [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/images/{id}/info")]
-        Task<IApiResponse<DetailedImage>> Info(long id, CancellationToken cancellationToken = default);
+        Task<IApiResponse<DetailedImage>> GetDetailedImageAsync(long id, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -162,7 +165,7 @@ namespace SastImg.Client.Service.API
         /// </returns>
         [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/albums/{albumId}/images/removed")]
-        Task<IApiResponse<ICollection<ImageDto>>> Removed2(long albumId, CancellationToken cancellationToken = default);
+        Task<IApiResponse<ICollection<ImageDto>>> GetRemovedImagesAsync(long albumId, CancellationToken cancellationToken = default);
     }
 
 }

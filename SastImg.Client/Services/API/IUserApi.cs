@@ -8,12 +8,14 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using SastImg.Client.Service.API;
 
 #nullable enable annotations
 
 namespace SastImg.Client.Service.API
 {
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.4.1.0")]
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.5.0.0")]
+    [Headers("Authorization: Bearer")]
     public partial interface IUserApi
     {
         /// <returns>
@@ -30,7 +32,7 @@ namespace SastImg.Client.Service.API
         /// </list>
         /// </returns>
         [Post("/api/users/biography")]
-        Task<IApiResponse> Biography([Body] UpdateBiographyRequest body, CancellationToken cancellationToken = default);
+        Task<IApiResponse> UpdateBiographyAsync([Body] UpdateBiographyRequest body, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -47,7 +49,7 @@ namespace SastImg.Client.Service.API
         /// </returns>
         [Multipart]
         [Post("/api/users/avatar")]
-        Task<IApiResponse> AvatarPOST(StreamPart avatar, CancellationToken cancellationToken = default);
+        Task<IApiResponse> UpdateAvatarAsync(StreamPart avatar, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -64,7 +66,7 @@ namespace SastImg.Client.Service.API
         /// </returns>
         [Multipart]
         [Post("/api/users/header")]
-        Task<IApiResponse> HeaderPOST(StreamPart header, CancellationToken cancellationToken = default);
+        Task<IApiResponse> UpdateHeaderAsync(StreamPart header, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -81,7 +83,7 @@ namespace SastImg.Client.Service.API
         /// </returns>
         [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/users/{id}/avatar")]
-        Task<IApiResponse<FileStreamResult>> AvatarGET(long id, CancellationToken cancellationToken = default);
+        Task<IApiResponse<FileStreamResult>> GetAvatarAsync(long id, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -98,7 +100,7 @@ namespace SastImg.Client.Service.API
         /// </returns>
         [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/users/{id}/header")]
-        Task<IApiResponse<FileStreamResult>> HeaderGET(long id, CancellationToken cancellationToken = default);
+        Task<IApiResponse<FileStreamResult>> GetHeaderAsync(long id, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -115,7 +117,7 @@ namespace SastImg.Client.Service.API
         /// </returns>
         [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/users/{id}/profile")]
-        Task<IApiResponse<UserProfileDto>> Profile(long id, CancellationToken cancellationToken = default);
+        Task<IApiResponse<UserProfileDto>> GetProfileInfoAsync(long id, CancellationToken cancellationToken = default);
     }
 
 }

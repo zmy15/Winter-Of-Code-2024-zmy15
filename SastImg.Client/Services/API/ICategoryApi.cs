@@ -8,12 +8,14 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using SastImg.Client.Service.API;
 
 #nullable enable annotations
 
 namespace SastImg.Client.Service.API
 {
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.4.1.0")]
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.5.0.0")]
+    [Headers("Authorization: Bearer")]
     public partial interface ICategoryApi
     {
         /// <returns>
@@ -30,7 +32,7 @@ namespace SastImg.Client.Service.API
         /// </list>
         /// </returns>
         [Post("/api/categories")]
-        Task<IApiResponse> Categories([Body] CreateCategoryRequest body, CancellationToken cancellationToken = default);
+        Task<IApiResponse> CreateCategoryAsync([Body] CreateCategoryRequest body, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -47,7 +49,7 @@ namespace SastImg.Client.Service.API
         /// </returns>
         [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/categories")]
-        Task<IApiResponse<ICollection<CategoryDto>>> CategoriesAll(CancellationToken cancellationToken = default);
+        Task<IApiResponse<ICollection<CategoryDto>>> GetCategoryAsync(CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -63,7 +65,7 @@ namespace SastImg.Client.Service.API
         /// </list>
         /// </returns>
         [Post("/api/categories/{id}/name")]
-        Task<IApiResponse> Name(long id, [Body] UpdateCategoryNameRequest body, CancellationToken cancellationToken = default);
+        Task<IApiResponse> UpdateCategoryNameAsync(long id, [Body] UpdateCategoryNameRequest body, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -79,7 +81,7 @@ namespace SastImg.Client.Service.API
         /// </list>
         /// </returns>
         [Post("/api/categories/{id}/description")]
-        Task<IApiResponse> Description2(long id, [Body] UpdateCategoryDescriptionRequest body, CancellationToken cancellationToken = default);
+        Task<IApiResponse> UpdateCategoryDescriptionAsync(long id, [Body] UpdateCategoryDescriptionRequest body, CancellationToken cancellationToken = default);
     }
 
 }

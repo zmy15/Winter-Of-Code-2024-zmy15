@@ -27,7 +27,7 @@ public class AuthService ( )
 
         try
         {
-            var result = await App.API!.Account.Login(new() { Username = username, Password = password });
+            var result = await App.API!.Account.LoginAsync(new() { Username = username, Password = password });
 
             if ( result.IsSuccessStatusCode == false )
                 return false;

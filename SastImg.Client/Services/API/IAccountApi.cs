@@ -8,12 +8,14 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using SastImg.Client.Service.API;
 
 #nullable enable annotations
 
 namespace SastImg.Client.Service.API
 {
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.4.1.0")]
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.5.0.0")]
+    [Headers("Authorization: Bearer")]
     public partial interface IAccountApi
     {
         /// <returns>
@@ -31,7 +33,7 @@ namespace SastImg.Client.Service.API
         /// </returns>
         [Headers("Accept: text/plain, application/json, text/json")]
         [Post("/api/account/register")]
-        Task<IApiResponse<AuthenticationResponse>> Register([Body] RegisterRequest body, CancellationToken cancellationToken = default);
+        Task<IApiResponse<AuthenticationResponse>> RegisterAsync([Body] RegisterRequest body, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -48,7 +50,7 @@ namespace SastImg.Client.Service.API
         /// </returns>
         [Headers("Accept: text/plain, application/json, text/json")]
         [Post("/api/account/login")]
-        Task<IApiResponse<AuthenticationResponse>> Login([Body] LoginRequest body, CancellationToken cancellationToken = default);
+        Task<IApiResponse<AuthenticationResponse>> LoginAsync([Body] LoginRequest body, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -64,7 +66,7 @@ namespace SastImg.Client.Service.API
         /// </list>
         /// </returns>
         [Post("/api/account/reset/password")]
-        Task<IApiResponse> Password([Body] ResetPasswordRequest body, CancellationToken cancellationToken = default);
+        Task<IApiResponse> ResetPasswordAsync([Body] ResetPasswordRequest body, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -80,7 +82,7 @@ namespace SastImg.Client.Service.API
         /// </list>
         /// </returns>
         [Post("/api/account/reset/username")]
-        Task<IApiResponse> Username([Body] ResetUsernameRequest body, CancellationToken cancellationToken = default);
+        Task<IApiResponse> ResetUsernameAsync([Body] ResetUsernameRequest body, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -96,7 +98,7 @@ namespace SastImg.Client.Service.API
         /// </list>
         /// </returns>
         [Get("/api/account/username/check")]
-        Task<IApiResponse> Check([Query] string username, CancellationToken cancellationToken = default);
+        Task<IApiResponse> CheckUsernameExistenceAsync([Query] string username, CancellationToken cancellationToken = default);
     }
 
 }

@@ -13,6 +13,7 @@
         <Nullable>enable</Nullable>
         <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
         <DefaultLanguage>zh-CN</DefaultLanguage>
+		<ImplicitUsings>true</ImplicitUsings>
     </PropertyGroup>
 
     <ItemGroup>
@@ -34,5 +35,9 @@
         <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.241114003" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
         <PackageReference Include="Refit" Version="8.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Services\API\" />
     </ItemGroup>
 </Project>

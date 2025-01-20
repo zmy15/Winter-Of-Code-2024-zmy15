@@ -8,12 +8,14 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using SastImg.Client.Service.API;
 
 #nullable enable annotations
 
 namespace SastImg.Client.Service.API
 {
-    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.4.1.0")]
+    [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.5.0.0")]
+    [Headers("Authorization: Bearer")]
     public partial interface ITagApi
     {
         /// <returns>
@@ -30,7 +32,7 @@ namespace SastImg.Client.Service.API
         /// </list>
         /// </returns>
         [Post("/api/tags")]
-        Task<IApiResponse> TagsPOST([Body] CreateTagRequest body, CancellationToken cancellationToken = default);
+        Task<IApiResponse> CreateTagAsync([Body] CreateTagRequest body, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -47,7 +49,7 @@ namespace SastImg.Client.Service.API
         /// </returns>
         [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/tags")]
-        Task<IApiResponse<ICollection<TagDto>>> TagsAll([Query] string name, CancellationToken cancellationToken = default);
+        Task<IApiResponse<ICollection<TagDto>>> GetTagsAsync([Query] string name, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -63,7 +65,7 @@ namespace SastImg.Client.Service.API
         /// </list>
         /// </returns>
         [Post("/api/tags/{id}")]
-        Task<IApiResponse> TagsPOST2(long id, [Body] UpdateTagRequest body, CancellationToken cancellationToken = default);
+        Task<IApiResponse> UpdateTagAsync(long id, [Body] UpdateTagRequest body, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
@@ -79,7 +81,7 @@ namespace SastImg.Client.Service.API
         /// </list>
         /// </returns>
         [Delete("/api/tags/{id}")]
-        Task<IApiResponse> TagsDELETE(long id, CancellationToken cancellationToken = default);
+        Task<IApiResponse> DeleteTagAsync(long id, CancellationToken cancellationToken = default);
     }
 
 }
