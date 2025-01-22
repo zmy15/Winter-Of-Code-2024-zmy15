@@ -131,7 +131,7 @@ namespace SastImg.Client.Service.API
         /// </returns>
         [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/images/{id}")]
-        Task<IApiResponse<FileResponse>> GetImageAsync(long id, [Query] int? kind, CancellationToken cancellationToken = default);
+        Task<IApiResponse<Stream>> GetImageAsync(long id, [Query] int? kind, CancellationToken cancellationToken = default);
 
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:

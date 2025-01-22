@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Refit;
 using SastImg.Client.Service.API;
+using SastImg.Client.Helpers;
 
 namespace SastImg.Client.Services;
 
@@ -28,13 +29,15 @@ public class SastImgAPI
         var jsonSerializerOptions = new JsonSerializerOptions
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            NumberHandling = JsonNumberHandling.WriteAsString
+             NumberHandling = JsonNumberHandling.WriteAsString,
         };
+        jsonSerializerOptions.Converters.Add(new Int32Converter());
+        jsonSerializerOptions.Converters.Add(new Int64Converter());
 
         var refitSettings = new RefitSettings
         {
-            AuthorizationHeaderValueGetter = GetToken(),
-            ContentSerializer = new SystemTextJsonContentSerializer(jsonSerializerOptions)
+            AuthorizationHeaderValueGetter = (_, _) => Task.FromResult(App.AuthService.Token ?? ""),
+            ContentSerializer = new SystemTextJsonContentSerializer(jsonSerializerOptions),
         };
 
         Account = RestService.For<IAccountApi>("http://sastwoc2024.shirasagi.space:5265/", refitSettings);
@@ -43,10 +46,5 @@ public class SastImgAPI
         Category = RestService.For<ICategoryApi>("http://sastwoc2024.shirasagi.space:5265/", refitSettings);
         Tag = RestService.For<ITagApi>("http://sastwoc2024.shirasagi.space:5265/", refitSettings);
         User = RestService.For<IUserApi>("http://sastwoc2024.shirasagi.space:5265/", refitSettings);
-    }
-
-    private static Func<HttpRequestMessage, CancellationToken, Task<string>> GetToken()
-    {
-        return (_, _) => Task.FromResult(App.AuthService.Token ?? "");
     }
 }
