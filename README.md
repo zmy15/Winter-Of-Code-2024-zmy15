@@ -14,6 +14,8 @@ Fork 该仓库，新仓库的拥有者可以是你自己的账号，也可以放
 
 目前创建了两个用户，一个是普通用户`test`，密码为`123456`。一个是管理员`admin`，密码为`123456`。
 
+[Getting Started](https://github.com/NJUPT-SAST-Csharp/Winter-Of-Code-2024/blob/main/Getting%20Started.md)
+
 ## 项目结构介绍
 
 目前的项目中有多个文件夹:
