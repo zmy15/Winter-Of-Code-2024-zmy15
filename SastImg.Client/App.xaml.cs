@@ -21,20 +21,20 @@ public partial class App : Application
 
     protected override void OnLaunched (Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
     {
+        Shell = new ShellPage();
         MainWindow = new Window()
         {
             SystemBackdrop = new MicaBackdrop(),
             Title = "SAST Image",
-            Content = new ShellPage(out var frame)
+            Content = Shell
         };
-        MainFrame = frame;
         MainWindow.AppWindow.TitleBar.ExtendsContentIntoTitleBar = true;
         MainWindow.AppWindow.TitleBar.ButtonBackgroundColor = Colors.Transparent;
         MainWindow.Activate();
         WindowHelper.TrackWindow(MainWindow);
     }
 
-    public static Frame? MainFrame;
+    public static ShellPage? Shell;
     public static Window? MainWindow;
     public static SastImgAPI? API;
     public static AuthService AuthService = new();
