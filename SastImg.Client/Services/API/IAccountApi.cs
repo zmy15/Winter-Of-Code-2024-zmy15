@@ -14,10 +14,13 @@ using SastImg.Client.Service.API;
 
 namespace SastImg.Client.Service.API
 {
+    /// <summary>Register</summary>
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.5.0.0")]
     [Headers("Authorization: Bearer")]
     public partial interface IAccountApi
     {
+        /// <summary>Register</summary>
+        /// <remarks>Register with given registry code.</remarks>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -35,6 +38,8 @@ namespace SastImg.Client.Service.API
         [Post("/api/account/register")]
         Task<IApiResponse<AuthenticationResponse>> RegisterAsync([Body] RegisterRequest body, CancellationToken cancellationToken = default);
 
+        /// <summary>Login</summary>
+        /// <remarks>Login.</remarks>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -52,6 +57,8 @@ namespace SastImg.Client.Service.API
         [Post("/api/account/login")]
         Task<IApiResponse<AuthenticationResponse>> LoginAsync([Body] LoginRequest body, CancellationToken cancellationToken = default);
 
+        /// <summary>ResetPassword</summary>
+        /// <remarks>Reset password.</remarks>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -68,6 +75,8 @@ namespace SastImg.Client.Service.API
         [Post("/api/account/reset/password")]
         Task<IApiResponse> ResetPasswordAsync([Body] ResetPasswordRequest body, CancellationToken cancellationToken = default);
 
+        /// <summary>ResetUsername</summary>
+        /// <remarks>Reset username.</remarks>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -84,6 +93,9 @@ namespace SastImg.Client.Service.API
         [Post("/api/account/reset/username")]
         Task<IApiResponse> ResetUsernameAsync([Body] ResetUsernameRequest body, CancellationToken cancellationToken = default);
 
+        /// <summary>CheckUsernameExistence</summary>
+        /// <remarks>Check if the current username has been occupied.</remarks>
+        /// <param name="username">The current input username.</param>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">

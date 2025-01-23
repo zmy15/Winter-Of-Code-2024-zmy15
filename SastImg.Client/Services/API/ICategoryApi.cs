@@ -14,10 +14,17 @@ using SastImg.Client.Service.API;
 
 namespace SastImg.Client.Service.API
 {
+    /// <summary>CreateCategory</summary>
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.5.0.0")]
     [Headers("Authorization: Bearer")]
     public partial interface ICategoryApi
     {
+        /// <summary>CreateCategory</summary>
+        /// <remarks>
+        /// Create a new category.
+        /// 
+        /// Require ADMIN.
+        /// </remarks>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -34,6 +41,8 @@ namespace SastImg.Client.Service.API
         [Post("/api/categories")]
         Task<IApiResponse> CreateCategoryAsync([Body] CreateCategoryRequest body, CancellationToken cancellationToken = default);
 
+        /// <summary>GetCategories</summary>
+        /// <remarks>Get all available categories.</remarks>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -51,6 +60,13 @@ namespace SastImg.Client.Service.API
         [Get("/api/categories")]
         Task<IApiResponse<ICollection<CategoryDto>>> GetCategoryAsync(CancellationToken cancellationToken = default);
 
+        /// <summary>UpdateName</summary>
+        /// <remarks>
+        /// Update the name of the specific category.
+        /// 
+        /// Require ADMIN.
+        /// </remarks>
+        /// <param name="id">The id of the category. Can convert to long.</param>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -67,6 +83,13 @@ namespace SastImg.Client.Service.API
         [Post("/api/categories/{id}/name")]
         Task<IApiResponse> UpdateCategoryNameAsync(long id, [Body] UpdateCategoryNameRequest body, CancellationToken cancellationToken = default);
 
+        /// <summary>UpdateDescription</summary>
+        /// <remarks>
+        /// Update the name of the specific category.
+        /// 
+        /// Require ADMIN.
+        /// </remarks>
+        /// <param name="id">The id of the category. Can convert to long.</param>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
