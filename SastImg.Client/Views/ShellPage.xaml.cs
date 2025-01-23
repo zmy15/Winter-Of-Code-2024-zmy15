@@ -7,10 +7,10 @@ public sealed partial class ShellPage : Page
 {
     private ShellPageViewModel vm = new();
 
-    public ShellPage (ref Frame frame )
+    public ShellPage (out Frame frame )
     {
         this.InitializeComponent();
-        frame = Frame;
+        frame = MainFrame;
         // 首先显示首页
         MainFrame.Navigate(typeof(HomeView));
         NavView.SelectedItem = NavView.MenuItems[0];
@@ -27,9 +27,6 @@ public sealed partial class ShellPage : Page
                     break;
                 case "Settings":
                     MainFrame.Navigate(typeof(SettingsView));
-                    break;
-                case "Test":
-                    MainFrame.Navigate(typeof(TestView));
                     break;
                 case "GitHub":
                     await Launcher.LaunchUriAsync(new Uri("https://github.com/NJUPT-SAST-Csharp/Winter-Of-Code-2024"));
