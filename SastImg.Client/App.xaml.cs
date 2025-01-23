@@ -25,8 +25,9 @@ public partial class App : Application
         {
             SystemBackdrop = new MicaBackdrop(),
             Title = "SAST Image",
-            Content = new ShellPage(ref MainFrame)
+            Content = new ShellPage(out var frame)
         };
+        MainFrame = frame;
         MainWindow.AppWindow.TitleBar.ExtendsContentIntoTitleBar = true;
         MainWindow.AppWindow.TitleBar.ButtonBackgroundColor = Colors.Transparent;
         MainWindow.Activate();
