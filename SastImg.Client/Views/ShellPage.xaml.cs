@@ -7,10 +7,9 @@ public sealed partial class ShellPage : Page
 {
     private ShellPageViewModel vm = new();
 
-    public ShellPage ( )
+    public ShellPage ()
     {
         this.InitializeComponent();
-
         // 首先显示首页
         MainFrame.Navigate(typeof(HomeView));
         NavView.SelectedItem = NavView.MenuItems[0];

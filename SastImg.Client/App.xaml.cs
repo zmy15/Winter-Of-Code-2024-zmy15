@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using SastImg.Client.Helpers;
 using SastImg.Client.Services;
@@ -20,11 +21,12 @@ public partial class App : Application
 
     protected override void OnLaunched (Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
     {
+        Shell = new ShellPage();
         MainWindow = new Window()
         {
             SystemBackdrop = new MicaBackdrop(),
             Title = "SAST Image",
-            Content = new ShellPage()
+            Content = Shell
         };
         MainWindow.AppWindow.TitleBar.ExtendsContentIntoTitleBar = true;
         MainWindow.AppWindow.TitleBar.ButtonBackgroundColor = Colors.Transparent;
@@ -32,6 +34,7 @@ public partial class App : Application
         WindowHelper.TrackWindow(MainWindow);
     }
 
+    public static ShellPage? Shell;
     public static Window? MainWindow;
     public static SastImgAPI? API;
     public static AuthService AuthService = new();

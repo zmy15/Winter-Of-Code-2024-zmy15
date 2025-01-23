@@ -14,10 +14,13 @@ using SastImg.Client.Service.API;
 
 namespace SastImg.Client.Service.API
 {
+    /// <summary>UpdateBiography</summary>
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.5.0.0")]
     [Headers("Authorization: Bearer")]
     public partial interface IUserApi
     {
+        /// <summary>UpdateBiography</summary>
+        /// <remarks>Update the biography</remarks>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -34,6 +37,8 @@ namespace SastImg.Client.Service.API
         [Post("/api/users/biography")]
         Task<IApiResponse> UpdateBiographyAsync([Body] UpdateBiographyRequest body, CancellationToken cancellationToken = default);
 
+        /// <summary>UpdateAvatar</summary>
+        /// <remarks>Update the user avatar image.</remarks>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -51,6 +56,8 @@ namespace SastImg.Client.Service.API
         [Post("/api/users/avatar")]
         Task<IApiResponse> UpdateAvatarAsync(StreamPart avatar, CancellationToken cancellationToken = default);
 
+        /// <summary>UpdateHeader</summary>
+        /// <remarks>Update the user header image.</remarks>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -68,6 +75,9 @@ namespace SastImg.Client.Service.API
         [Post("/api/users/header")]
         Task<IApiResponse> UpdateHeaderAsync(StreamPart header, CancellationToken cancellationToken = default);
 
+        /// <summary>GetAvatar</summary>
+        /// <remarks>Get the avatar image file of the specific user.</remarks>
+        /// <param name="id">The user id.</param>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -85,6 +95,9 @@ namespace SastImg.Client.Service.API
         [Get("/api/users/{id}/avatar")]
         Task<IApiResponse<FileStreamResult>> GetAvatarAsync(long id, CancellationToken cancellationToken = default);
 
+        /// <summary>GetHeader</summary>
+        /// <remarks>Get the header image file of the specific user.</remarks>
+        /// <param name="id">The user id.</param>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -102,6 +115,9 @@ namespace SastImg.Client.Service.API
         [Get("/api/users/{id}/header")]
         Task<IApiResponse<FileStreamResult>> GetHeaderAsync(long id, CancellationToken cancellationToken = default);
 
+        /// <summary>GetProfile</summary>
+        /// <remarks>Get the profile info of the specific user.</remarks>
+        /// <param name="id">The user id.</param>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">

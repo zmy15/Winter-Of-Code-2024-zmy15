@@ -14,10 +14,13 @@ using SastImg.Client.Service.API;
 
 namespace SastImg.Client.Service.API
 {
+    /// <summary>CreateTag</summary>
     [System.CodeDom.Compiler.GeneratedCode("Refitter", "1.5.0.0")]
     [Headers("Authorization: Bearer")]
     public partial interface ITagApi
     {
+        /// <summary>CreateTag</summary>
+        /// <remarks>Create a new tag.</remarks>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -34,6 +37,13 @@ namespace SastImg.Client.Service.API
         [Post("/api/tags")]
         Task<IApiResponse> CreateTagAsync([Body] CreateTagRequest body, CancellationToken cancellationToken = default);
 
+        /// <summary>GetTags</summary>
+        /// <remarks>
+        /// Get all tags
+        /// 
+        /// Add query "name" to filter the result.
+        /// </remarks>
+        /// <param name="name">Filter for name. Max 100 length.</param>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -51,6 +61,7 @@ namespace SastImg.Client.Service.API
         [Get("/api/tags")]
         Task<IApiResponse<ICollection<TagDto>>> GetTagsAsync([Query] string name, CancellationToken cancellationToken = default);
 
+        /// <param name="id">The tag id.</param>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -67,6 +78,13 @@ namespace SastImg.Client.Service.API
         [Post("/api/tags/{id}")]
         Task<IApiResponse> UpdateTagAsync(long id, [Body] UpdateTagRequest body, CancellationToken cancellationToken = default);
 
+        /// <summary>DeleteTag</summary>
+        /// <remarks>
+        /// Delete a tag permanently.
+        /// 
+        /// All images own the tag will remove the tag in their collection.
+        /// </remarks>
+        /// <param name="id">The tag id.</param>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">

@@ -42,6 +42,11 @@ namespace SastImg.Client.Service.API
         [Post("/api/albums")]
         Task<IApiResponse<int>> CreateAlbumAsync([Body] CreateAlbumRequest body, CancellationToken cancellationToken = default);
 
+        /// <summary>GetAlbums</summary>
+        /// <remarks>Get/Search albums with specific category, author or title.</remarks>
+        /// <param name="category">The category id.</param>
+        /// <param name="author">The author id.</param>
+        /// <param name="title">The title.</param>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -57,13 +62,14 @@ namespace SastImg.Client.Service.API
         /// </returns>
         [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/albums")]
-        Task<IApiResponse<ICollection<AlbumDto>>> GetAlbumsAsync([Query] long? category = null, [Query] long? author = null, [Query] string title = null, CancellationToken cancellationToken = default);
+        Task<IApiResponse<ICollection<AlbumDto>>> GetAlbumsAsync([Query] long? category, [Query] long? author, [Query] string title, CancellationToken cancellationToken = default);
 
         /// <summary>RemoveAlbum</summary>
         /// <remarks>
         /// Remove album.
         /// The operation can be restored within a period of time.
         /// </remarks>
+        /// <param name="id">The album id.</param>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -87,6 +93,7 @@ namespace SastImg.Client.Service.API
 
         /// <summary>RestoreAlbum</summary>
         /// <remarks>Restore removed album.</remarks>
+        /// <param name="id">The removed album id.</param>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -117,6 +124,7 @@ namespace SastImg.Client.Service.API
         /// 3 - AuthReadOnly - Everyone can see, auth users can read.
         /// 4 - PublicReadWrite - Everyone can see, auth users can read & add.
         /// </remarks>
+        /// <param name="id">The album id.</param>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -144,6 +152,7 @@ namespace SastImg.Client.Service.API
 
         /// <summary>UpdateDescription</summary>
         /// <remarks>Update album description.</remarks>
+        /// <param name="id">The album id.</param>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -171,6 +180,7 @@ namespace SastImg.Client.Service.API
 
         /// <summary>UpdateTitle</summary>
         /// <remarks>Update album title.</remarks>
+        /// <param name="id">The album id.</param>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -206,6 +216,7 @@ namespace SastImg.Client.Service.API
         /// Collaborators can add/remove images in the album.
         /// Max 32.
         /// </remarks>
+        /// <param name="id">The album id.</param>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -249,6 +260,9 @@ namespace SastImg.Client.Service.API
         [Post("/api/albums/{id}/cover")]
         Task<IApiResponse> UpdateAlbumCoverAsync(long id, [Body] Body body, CancellationToken cancellationToken = default);
 
+        /// <summary>GetCover</summary>
+        /// <remarks>Get the album cover file.</remarks>
+        /// <param name="id">The album id.</param>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -266,6 +280,13 @@ namespace SastImg.Client.Service.API
         [Get("/api/albums/{id}/cover")]
         Task<IApiResponse<FileStreamResult>> GetAlbumCoverAsync(long id, CancellationToken cancellationToken = default);
 
+        /// <summary>Subscribe</summary>
+        /// <remarks>
+        /// Subscribe an album.
+        /// 
+        /// When the album is updated, u'll get notifications.
+        /// </remarks>
+        /// <param name="id">The album id.</param>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -282,6 +303,9 @@ namespace SastImg.Client.Service.API
         [Post("/api/albums/{id}/subscribe")]
         Task<IApiResponse> SubscribeAlbumAsync(long id, CancellationToken cancellationToken = default);
 
+        /// <summary>Unsubscribe</summary>
+        /// <remarks>Unsubscribe an album.</remarks>
+        /// <param name="id">The album id.</param>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -298,6 +322,9 @@ namespace SastImg.Client.Service.API
         [Post("/api/albums/{id}/unsubscribe")]
         Task<IApiResponse> UnsubscribeAlbumAsync(long id, CancellationToken cancellationToken = default);
 
+        /// <summary>GetDetailedAlbum</summary>
+        /// <remarks>Get detailed album info.</remarks>
+        /// <param name="id">The album id.</param>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">
@@ -315,6 +342,8 @@ namespace SastImg.Client.Service.API
         [Get("/api/albums/{id}")]
         Task<IApiResponse<DetailedAlbum>> GetDetailedAlbumAsync(long id, CancellationToken cancellationToken = default);
 
+        /// <summary>GetRemovedAlbums</summary>
+        /// <remarks>Get removed albums.</remarks>
         /// <returns>
         /// A <see cref="Task"/> representing the <see cref="IApiResponse"/> instance containing the result:
         /// <list type="table">

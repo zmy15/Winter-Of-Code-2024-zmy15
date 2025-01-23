@@ -57,6 +57,9 @@ namespace SastImg.Client.Service.API
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AuthenticationResponse
     {
+        /// <summary>
+        /// The jwt token.
+        /// </summary>
 
         [System.Text.Json.Serialization.JsonPropertyName("token")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -132,19 +135,37 @@ namespace SastImg.Client.Service.API
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CreateAlbumRequest
     {
+        /// <summary>
+        /// The album title.
+        /// </summary>
 
         [System.Text.Json.Serialization.JsonPropertyName("title")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(200, MinimumLength = 1)]
         public string Title { get; set; }
 
+        /// <summary>
+        /// The album description.
+        /// </summary>
+
         [System.Text.Json.Serialization.JsonPropertyName("description")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(600, MinimumLength = 3)]
         public string Description { get; set; }
+
+        /// <summary>
+        /// The category's id album belongs to.
+        /// </summary>
 
         [System.Text.Json.Serialization.JsonPropertyName("categoryId")]
         public long CategoryId { get; set; }
 
+        /// <summary>
+        /// The album access level.
+        /// </summary>
+
         [System.Text.Json.Serialization.JsonPropertyName("accessLevel")]
+        [System.ComponentModel.DataAnnotations.Range(0, 4)]
         public int AccessLevel { get; set; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
@@ -161,13 +182,22 @@ namespace SastImg.Client.Service.API
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CreateCategoryRequest
     {
+        /// <summary>
+        /// The category name.
+        /// </summary>
 
         [System.Text.Json.Serialization.JsonPropertyName("name")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(500, MinimumLength = 2)]
         public string Name { get; set; }
+
+        /// <summary>
+        /// The category description
+        /// </summary>
 
         [System.Text.Json.Serialization.JsonPropertyName("description")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.StringLength(1000)]
         public string Description { get; set; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
@@ -184,9 +214,13 @@ namespace SastImg.Client.Service.API
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class CreateTagRequest
     {
+        /// <summary>
+        /// The tag name. Limit 1-100 length.
+        /// </summary>
 
         [System.Text.Json.Serialization.JsonPropertyName("name")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(100, MinimumLength = 1)]
         public string Name { get; set; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
@@ -264,8 +298,8 @@ namespace SastImg.Client.Service.API
         [System.Text.Json.Serialization.JsonPropertyName("tags")]
         public System.Collections.Generic.ICollection<long> Tags { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("likeCount")]
-        public int LikeCount { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("likes")]
+        public int Likes { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("requester")]
         public RequesterInfo Requester { get; set; }
@@ -389,13 +423,22 @@ namespace SastImg.Client.Service.API
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LoginRequest
     {
+        /// <summary>
+        /// Length limited 2-160
+        /// </summary>
 
         [System.Text.Json.Serialization.JsonPropertyName("username")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(160, MinimumLength = 2)]
         public string Username { get; set; }
 
+        /// <summary>
+        /// Length limited 6-200
+        /// </summary>
+
         [System.Text.Json.Serialization.JsonPropertyName("password")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(200, MinimumLength = 6)]
         public string Password { get; set; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
@@ -442,16 +485,30 @@ namespace SastImg.Client.Service.API
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class RegisterRequest
     {
+        /// <summary>
+        /// Length limited 2-160
+        /// </summary>
 
         [System.Text.Json.Serialization.JsonPropertyName("username")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(160, MinimumLength = 2)]
         public string Username { get; set; }
 
+        /// <summary>
+        /// Length limited 6-200
+        /// </summary>
+
         [System.Text.Json.Serialization.JsonPropertyName("password")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(200, MinimumLength = 6)]
         public string Password { get; set; }
 
+        /// <summary>
+        /// The registry code.
+        /// </summary>
+
         [System.Text.Json.Serialization.JsonPropertyName("code")]
+        [System.ComponentModel.DataAnnotations.Range(100000, 999999)]
         public int Code { get; set; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
@@ -516,13 +573,22 @@ namespace SastImg.Client.Service.API
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ResetPasswordRequest
     {
+        /// <summary>
+        /// The original password.
+        /// </summary>
 
         [System.Text.Json.Serialization.JsonPropertyName("oldPassword")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(200, MinimumLength = 6)]
         public string OldPassword { get; set; }
 
+        /// <summary>
+        /// The new password
+        /// </summary>
+
         [System.Text.Json.Serialization.JsonPropertyName("newPassword")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(200, MinimumLength = 6)]
         public string NewPassword { get; set; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
@@ -539,9 +605,13 @@ namespace SastImg.Client.Service.API
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ResetUsernameRequest
     {
+        /// <summary>
+        /// The new username.
+        /// </summary>
 
         [System.Text.Json.Serialization.JsonPropertyName("username")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(160, MinimumLength = 2)]
         public string Username { get; set; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
@@ -627,6 +697,7 @@ namespace SastImg.Client.Service.API
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("accessLevel")]
+        [System.ComponentModel.DataAnnotations.Range(0, 4)]
         public int AccessLevel { get; set; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
@@ -646,6 +717,7 @@ namespace SastImg.Client.Service.API
 
         [System.Text.Json.Serialization.JsonPropertyName("biography")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.StringLength(500)]
         public string Biography { get; set; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
@@ -662,9 +734,13 @@ namespace SastImg.Client.Service.API
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class UpdateCategoryDescriptionRequest
     {
+        /// <summary>
+        /// The description of category.
+        /// </summary>
 
         [System.Text.Json.Serialization.JsonPropertyName("description")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.StringLength(1000)]
         public string Description { get; set; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
@@ -681,9 +757,13 @@ namespace SastImg.Client.Service.API
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class UpdateCategoryNameRequest
     {
+        /// <summary>
+        /// The name of category.
+        /// </summary>
 
         [System.Text.Json.Serialization.JsonPropertyName("name")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(500, MinimumLength = 2)]
         public string Name { get; set; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
@@ -719,9 +799,13 @@ namespace SastImg.Client.Service.API
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class UpdateDescriptionRequest
     {
+        /// <summary>
+        /// Required. 3 - 600 characters.
+        /// </summary>
 
         [System.Text.Json.Serialization.JsonPropertyName("description")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(600, MinimumLength = 3)]
         public string Description { get; set; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
@@ -738,9 +822,13 @@ namespace SastImg.Client.Service.API
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class UpdateTagRequest
     {
+        /// <summary>
+        /// The tag name. Limit 1-100 length.
+        /// </summary>
 
         [System.Text.Json.Serialization.JsonPropertyName("name")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(100, MinimumLength = 1)]
         public string Name { get; set; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
@@ -757,9 +845,13 @@ namespace SastImg.Client.Service.API
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class UpdateTitleRequest
     {
+        /// <summary>
+        /// Required. 1 - 200 characters.
+        /// </summary>
 
         [System.Text.Json.Serialization.JsonPropertyName("title")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(200, MinimumLength = 1)]
         public string Title { get; set; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
@@ -804,9 +896,11 @@ namespace SastImg.Client.Service.API
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("ContentType")]
+        [System.ComponentModel.DataAnnotations.StringLength(200)]
         public string ContentType { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("ContentDisposition")]
+        [System.ComponentModel.DataAnnotations.StringLength(200)]
         public string ContentDisposition { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Headers")]
@@ -816,10 +910,38 @@ namespace SastImg.Client.Service.API
         public long Length { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("Name")]
+        [System.ComponentModel.DataAnnotations.StringLength(200)]
         public string Name { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("FileName")]
+        [System.ComponentModel.DataAnnotations.StringLength(200)]
         public string FileName { get; set; }
+
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [System.Text.Json.Serialization.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class Body2
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("Title")]
+        [System.ComponentModel.DataAnnotations.StringLength(200)]
+        public string Title { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Image")]
+        public byte[] Image { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("Tags")]
+        [System.ComponentModel.DataAnnotations.MaxLength(10)]
+        public System.Collections.Generic.ICollection<long> Tags { get; set; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
