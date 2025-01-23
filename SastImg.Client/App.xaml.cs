@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using SastImg.Client.Helpers;
 using SastImg.Client.Services;
@@ -24,7 +25,7 @@ public partial class App : Application
         {
             SystemBackdrop = new MicaBackdrop(),
             Title = "SAST Image",
-            Content = new ShellPage()
+            Content = new ShellPage(ref MainFrame)
         };
         MainWindow.AppWindow.TitleBar.ExtendsContentIntoTitleBar = true;
         MainWindow.AppWindow.TitleBar.ButtonBackgroundColor = Colors.Transparent;
@@ -32,6 +33,7 @@ public partial class App : Application
         WindowHelper.TrackWindow(MainWindow);
     }
 
+    public static Frame? MainFrame;
     public static Window? MainWindow;
     public static SastImgAPI? API;
     public static AuthService AuthService = new();
