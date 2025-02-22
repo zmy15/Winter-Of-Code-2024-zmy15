@@ -5,13 +5,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:SastImg.Client.Views"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DataContext="{d:DesignInstance Type=local:SettingsViewModel}"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="Transparent"
     mc:Ignorable="d">
 
     <Grid>
-        <TextBlock Grid.Row="0"
-              Margin="40,20"
+        <TextBlock
+              Margin="40"
               Style="{ThemeResource TitleTextBlockStyle}"
               Text="设置"/>
     </Grid>
