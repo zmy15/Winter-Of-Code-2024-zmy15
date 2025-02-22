@@ -33,6 +33,10 @@
                     Content="主页"
                     Icon="Home"
                     Tag="Home" />
+                <NavigationViewItem
+                    Content="相册"
+                    Icon="Pictures"
+                    Tag="Album" />
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>
                 <NavigationViewItem
@@ -59,6 +63,7 @@
                 CompactStateBreakpoint="720"
                 DisplayMode="Tall"
                 IsBackButtonVisible="{x:Bind MainFrame.CanGoBack, Mode=OneWay}"
+                BackButtonClick="TitleBar_BackButtonClick"
                 IsPaneButtonVisible="False"
                 Subtitle="Dev"
                 Window="{x:Bind local:App.MainWindow}">
@@ -102,6 +107,16 @@
                                         <FontIcon Glyph="&#xE8A6;" />
                                     </cc:IconButton.Icon>
                                     退出登录
+                                </cc:IconButton>
+                                <cc:IconButton
+                                    HorizontalAlignment="Stretch"
+                                    Command="{x:Bind vm.SignUpCommand}"
+                                    Style="{StaticResource TransparentIconButtonStyle}"
+                                    Visibility="{x:Bind helper:BindHelper.BoolToVisibility(vm.IsLoggedIn, x:True), Mode=OneWay}">
+                                    <cc:IconButton.Icon>
+                                        <FontIcon Glyph="&#xE8A6;" />
+                                    </cc:IconButton.Icon>
+                                    注册
                                 </cc:IconButton>
 
                             </StackPanel>

@@ -15,7 +15,6 @@ public partial class ShellPageViewModel : ObservableObject
     }
 
     public string Username => IsLoggedIn ? (App.AuthService.Username ?? DefaultUsername) : DefaultUsername;
-
     public bool IsLoggedIn => App.AuthService.IsLoggedIn;
 
     public void OnLoginStatusChanged (bool isLogin, string? username)
@@ -33,5 +32,10 @@ public partial class ShellPageViewModel : ObservableObject
     public ICommand LogoutCommand => new RelayCommand(( ) =>
     {
         App.AuthService.Logout();
+    });
+    public ICommand SignUpCommand => new RelayCommand(async () =>
+    {
+        var dialog = new SignUpDialog();
+        await dialog.ShowAsync();
     });
 }

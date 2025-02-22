@@ -22,8 +22,10 @@ namespace SastImg.Client.Views;
 /// </summary>
 public sealed partial class SettingsView : Page
 {
+    public SettingsViewModel ViewModel { get; set; } = new();
     public SettingsView ( )
     {
         this.InitializeComponent();
+        this.DataContext = ViewModel;
     }
 }

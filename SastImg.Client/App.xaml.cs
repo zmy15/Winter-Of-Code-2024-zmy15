@@ -38,4 +38,6 @@ public partial class App : Application
     public static Window? MainWindow;
     public static SastImgAPI? API;
     public static AuthService AuthService = new();
+    public static ImageService ImageService = new();
+    public static CategoryService CategoryService = new();
 }

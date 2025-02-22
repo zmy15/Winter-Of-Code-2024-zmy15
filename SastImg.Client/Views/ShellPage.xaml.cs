@@ -1,4 +1,5 @@
 using System;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Windows.System;
 
@@ -24,6 +25,9 @@ public sealed partial class ShellPage : Page
                 case "Home":
                     MainFrame.Navigate(typeof(HomeView));
                     break;
+                case "Album":
+                    MainFrame.Navigate(typeof(AlbumView));
+                    break;
                 case "Settings":
                     MainFrame.Navigate(typeof(SettingsView));
                     break;
@@ -33,5 +37,11 @@ public sealed partial class ShellPage : Page
             }
         };
     }
-
+    private void TitleBar_BackButtonClick(object sender, RoutedEventArgs e)
+    {
+        if (MainFrame.CanGoBack)
+        {
+            MainFrame.GoBack();
+        }
+    }
 }

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SastImg.Client.Views.AlbumView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SastImg.Client.Views"
+    xmlns:converters="using:SastImg.Client.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:ui="using:Microsoft.UI.Xaml.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    d:DataContext="{d:DesignInstance Type=local:AlbumViewModel}"
+    mc:Ignorable="d"
+    Background="Lavender">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- 标题 -->
+        <TextBlock Grid.Row="0"
+              Margin="40,20"
+              Style="{ThemeResource TitleTextBlockStyle}"
+              Text="相册"/>
+
+        <!-- 带滚动的主内容区 -->
+        <ScrollViewer Grid.Row="1"
+                 VerticalScrollBarVisibility="Auto"
+                 HorizontalScrollBarVisibility="Disabled"
+                 Padding="0,0,0,40">
+            <ItemsControl ItemsSource="{Binding AlbumCategories}"
+                     Margin="40,0">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <!-- 单个分类容器 -->
+                        <StackPanel Margin="0,20">
+                            <!-- 分类标题 -->
+                            <TextBlock Text="{Binding CategoryName}"
+                                  Style="{StaticResource SubtitleTextBlockStyle}"
+                                  Margin="0,0,0,15"/>
+
+                            <!-- 横向相册列表 -->
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                     VerticalScrollBarVisibility="Disabled"
+                                     Height="220">
+                                <ItemsControl ItemsSource="{Binding Albums}">
+                                    <!-- 水平布局面板 -->
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal" Spacing="20"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+
+                                    <!-- 相册项模板 -->
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Width="280" Height="200">
+                                                <!-- 背景卡片 -->
+                                                <Border Background="{ThemeResource CardBackgroundFillColorDefault}"
+                                                   CornerRadius="8"
+                                                   Margin="0,0,0,10">
+                                                    <!-- 封面图片 -->
+                                                    <Image Source="{Binding Thumbnail}"
+                                                      Stretch="UniformToFill"
+                                                      Height="200"/>
+                                                </Border>
+
+                                                <!-- 相册信息 -->
+                                                <StackPanel VerticalAlignment="Bottom"
+                                                       Margin="12">
+                                                    <TextBlock Text="{Binding AlbumName}"
+                                                          Style="{StaticResource BodyStrongTextBlockStyle}"/>
+                                                    <TextBlock Text="{Binding PhotoCount}"
+                                                          Style="{StaticResource CaptionTextBlockStyle}"
+                                                          Foreground="{ThemeResource TextFillColorSecondary}"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Page>

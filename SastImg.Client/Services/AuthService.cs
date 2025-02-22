@@ -10,6 +10,7 @@ public class AuthService ( )
 {
     private string? _token;
     private bool _isLoggedIn;
+    private bool _isSignedUp;
     private string? _username;
 
     public string? Token => _token;
@@ -59,4 +60,34 @@ public class AuthService ( )
     }
 
     public event Action<bool,string?>? LoginStateChanged; // 当登录状态改变时触发事件。传递的第一个参数表示是否登录，第二个参数表示登录的用户名
+
+    /// <summary>
+    /// 注册
+    /// </summary>
+    public async Task<bool> SignUpAsync(string username, string password)
+    {
+        _username = null;
+        _isSignedUp = false;
+
+        try
+        {
+            var result = await App.API!.Account.RegisterAsync(new() { Username = username, Password = password, Code = 114514});
+
+            if (result.IsSuccessStatusCode == false)
+                return false;
+
+            _username = username;
+            _isSignedUp = true;
+            var login = await LoginAsync(username, password);
+            LoginStateChanged?.Invoke(login, username); // 触发登陆成功事件
+        }
+        catch
+        {
+            return false;
+        }
+
+        return true;
+    }
 }
+
+

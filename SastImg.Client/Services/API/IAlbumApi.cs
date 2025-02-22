@@ -62,7 +62,7 @@ namespace SastImg.Client.Service.API
         /// </returns>
         [Headers("Accept: text/plain, application/json, text/json")]
         [Get("/api/albums")]
-        Task<IApiResponse<ICollection<AlbumDto>>> GetAlbumsAsync([Query] long? category, [Query] long? author, [Query] string title, CancellationToken cancellationToken = default);
+        Task<IApiResponse<ICollection<AlbumDto>>> GetAlbumsAsync([Query] long? category, [Query] long? author, [Query] string? title, CancellationToken cancellationToken = default);
 
         /// <summary>RemoveAlbum</summary>
         /// <remarks>
