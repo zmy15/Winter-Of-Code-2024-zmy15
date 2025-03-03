@@ -3,9 +3,11 @@ using SastImg.Client.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 
 namespace SastImg.Client.Services
 {
@@ -37,6 +39,7 @@ namespace SastImg.Client.Services
         public async Task<List<AlbumCategory>> GetCategories()
         {
             AlbumCategories.Clear();
+            var localFolder = ApplicationData.Current.LocalFolder;
             var response = await App.API!.Category.GetCategoryAsync();
             if (response.Content != null)
             {
@@ -49,16 +52,28 @@ namespace SastImg.Client.Services
                         foreach (var album in AlbumInfo)
                         {
                             var ImageInfo = await GetImagesByAlbum(album.Id);
+                            var id = ImageInfo.FirstOrDefault()?.Id;
+                            string filePath;
+                            if (id != null)
+                            {
+                                filePath = localFolder.Path + $"\\{id}.png";
+                                await App.ImageService.GetImageThumbnail(id);
+                            }
+                            else
+                            {
+                                filePath = "ms-appx:///Assets/NoImage.png";
+                            }
                             albumCollection.Add(new Album
                             {
                                 AlbumName = album.Title,
                                 PhotoCount = ImageInfo.Count,
-                                Thumbnail = "F:\\C#\\Winter-Of-Code-2024-zmy15\\image\\1332424588676468736.png"
+                                Thumbnail = filePath
                             });
                         }
                         var category = new AlbumCategory
                         {
                             CategoryName = item.Name,
+                            CategortId = item.Id,
                             Albums = albumCollection
                         };
                         AlbumCategories.Add(category);

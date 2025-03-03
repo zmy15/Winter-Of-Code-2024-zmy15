@@ -6,6 +6,9 @@ using System.Diagnostics;
 using SastImg.Client.Services;
 using SastImg.Client.Service.API;
 using Microsoft.UI.Xaml;
+using SastImg.Client.Views.Dialogs;
+using System.Windows.Input;
+using Microsoft.UI.Xaml.Controls;
 namespace SastImg.Client.Views
 {
     /// <summary>
@@ -24,16 +27,6 @@ namespace SastImg.Client.Views
         // 照片数量
         [ObservableProperty]
         private int _photoCount;
-
-        /// <summary>
-        /// 相册点击命令（CommunityToolkit自动生成RelayCommand）
-        /// </summary>
-        [RelayCommand]
-        private void Selected()
-        {
-            // 实际处理逻辑应通过消息或服务传递到ViewModel
-            System.Diagnostics.Debug.WriteLine($"相册点击: {AlbumName}");
-        }
     }
 
     /// <summary>
@@ -43,6 +36,7 @@ namespace SastImg.Client.Views
     {
         public string CategoryName { get; set; }
         public ObservableCollection<Album> Albums { get; set; }
+        public long CategortId { get; set; }
     }
 
     /// <summary>
@@ -52,7 +46,7 @@ namespace SastImg.Client.Views
     {
         // 分类数据集合
         [ObservableProperty]
-        private ObservableCollection<AlbumCategory> _albumCategories = new();
+        public ObservableCollection<AlbumCategory> _albumCategories = new();
 
         // 选中的相册（用于绑定）
         [ObservableProperty]
@@ -60,16 +54,6 @@ namespace SastImg.Client.Views
 
         [ObservableProperty]
         private bool _isLoading;
-
-        [RelayCommand]
-        private void AlbumSelected(object parameter)
-        {
-            if (parameter is Album selectedAlbum)
-            {
-                // 处理相册选择逻辑
-                Debug.WriteLine($"选中相册：{selectedAlbum.AlbumName}");
-            }
-        }
 
         public AlbumViewModel()
         {
@@ -80,23 +64,19 @@ namespace SastImg.Client.Views
         {
             var categories = await App.CategoryService.GetCategories();
             AlbumCategories.Clear();
-            Debug.WriteLine(AlbumCategories.Count);
             foreach (var c in categories)
             {
                 AlbumCategories.Add(c);
             }
-            Debug.WriteLine(AlbumCategories.Count);
         }
-
-        /// <summary>
-        /// 全局相册选择命令（建议通过Messenger实现跨组件通信）
-        /// </summary>
-        [RelayCommand]
-        private void SelectAlbum(Album album)
+        public ICommand CreateAlbumCommand => new RelayCommand<AlbumCategory>(async (category) =>
         {
-            SelectedAlbum = album;
-            WeakReferenceMessenger.Default.Send(album, "AlbumSelected");
-        }
-        
+            var dialog = new CreateAlbumDialog(category!.CategortId);
+            await dialog.ShowAsync();
+        });
+        public ICommand NavigateToAlbumDetailCommand => new RelayCommand<Album>(album =>
+        {
+            
+        });
     }
 }

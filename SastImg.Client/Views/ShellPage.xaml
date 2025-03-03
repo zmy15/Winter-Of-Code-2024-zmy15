@@ -52,7 +52,7 @@
                     Icon="Setting"
                     Tag="Settings" />
             </NavigationView.FooterMenuItems>
-            <Frame x:Name="MainFrame" />
+            <Frame x:Name="MainFrame" x:FieldModifier="public" />
         </NavigationView>
 
         <Grid ui:UIElementExtensions.ClipToBounds="False">

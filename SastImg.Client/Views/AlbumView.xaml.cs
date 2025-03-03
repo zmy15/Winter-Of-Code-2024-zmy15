@@ -4,7 +4,10 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
+using SastImg.Client.Service.API;
+using SastImg.Client.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -30,15 +33,6 @@ namespace SastImg.Client.Views
             ViewModel = new AlbumViewModel();
             this.InitializeComponent();
             this.DataContext = ViewModel;
-        }
-
-        private void OpenAlbum(object sender, RoutedEventArgs e)
-        {
-            if (sender is Button button && button.Tag is string albumName)
-            {
-                // 导航到相册详情页面
-                Frame.Navigate(typeof(AlbumDetailView), albumName);
-            }
         }
     }
 

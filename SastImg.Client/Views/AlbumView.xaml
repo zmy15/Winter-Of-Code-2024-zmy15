@@ -9,11 +9,73 @@
     xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     xmlns:ui="using:Microsoft.UI.Xaml.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    d:DataContext="{d:DesignInstance Type=local:AlbumViewModel}"
+    xmlns:viewmodels="using:SastImg.Client.Views"
+    d:DataContext="{d:DesignInstance Type=viewmodels:AlbumViewModel}"
     mc:Ignorable="d"
     Background="Lavender">
 
-    <Grid>
+    <Page.Resources>
+        <!-- 转换器 -->
+        <converters:AppendButtonConverter x:Key="AppendButtonConverter"/>
+
+        <!-- 相册项模板 -->
+        <DataTemplate x:Key="AlbumItemTemplate">
+            <Grid Width="220" Height="220">
+                <Button 
+                    Background="Transparent"
+                    Padding="0"
+                    BorderThickness="0"
+                    Command="{Binding DataContext.NavigateToAlbumDetailCommand, ElementName=PageRoot}"
+                    CommandParameter="{Binding}">
+                    <Grid>
+                        <Border CornerRadius="8" Margin="0,0,0,10">
+                            <Image Source="{Binding Thumbnail}"
+                                Stretch="UniformToFill"
+                                Height="220"/>
+                        </Border>
+                        <StackPanel VerticalAlignment="Bottom" Margin="10,0,0,-0">
+                            <TextBlock Text="{Binding AlbumName}" 
+                                Style="{StaticResource BodyStrongTextBlockStyle}"
+                                       FontSize="18"/>
+                            <TextBlock Text="{Binding PhotoCount}" 
+                                Style="{StaticResource CaptionTextBlockStyle}"
+                                Foreground="{ThemeResource TextFillColorSecondary}"
+                                       FontSize="18"/>
+                        </StackPanel>
+                    </Grid>
+                </Button>
+            </Grid>
+        </DataTemplate>
+
+        <!-- 创建按钮模板 -->
+        <DataTemplate x:Key="CreateButtonTemplate">
+            <Grid Width="220" Height="200">
+                <Border CornerRadius="8" Background="#22000000" Margin="0,0,0,10">
+                    <Button HorizontalAlignment="Stretch" 
+                            VerticalAlignment="Stretch"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Command="{Binding DataContext.CreateAlbumCommand, ElementName=PageRoot}"
+                            CommandParameter="{Binding}">
+                        <StackPanel HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center"
+                                    Spacing="8">
+                            <FontIcon Glyph="&#xE109;" FontSize="40"/>
+                            <TextBlock Text="新建相册" 
+                                       Style="{StaticResource BodyStrongTextBlockStyle}"/>
+                        </StackPanel>
+                    </Button>
+                </Border>
+            </Grid>
+        </DataTemplate>
+
+        <!-- 模板选择器 -->
+        <converters:AlbumTemplateSelector x:Key="AlbumTemplateSelector"
+                                   AlbumTemplate="{StaticResource AlbumItemTemplate}"
+                                   ButtonTemplate="{StaticResource CreateButtonTemplate}"/>
+    </Page.Resources>
+
+    <Grid x:Name="PageRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -21,64 +83,44 @@
 
         <!-- 标题 -->
         <TextBlock Grid.Row="0"
-              Margin="40,20"
-              Style="{ThemeResource TitleTextBlockStyle}"
-              Text="相册"/>
+                   Margin="40,20"
+                   Style="{ThemeResource TitleTextBlockStyle}"
+                   Text="相册"/>
 
         <!-- 带滚动的主内容区 -->
         <ScrollViewer Grid.Row="1"
-                 VerticalScrollBarVisibility="Auto"
-                 HorizontalScrollBarVisibility="Disabled"
-                 Padding="0,0,0,40">
+                     VerticalScrollBarVisibility="Auto"
+                     HorizontalScrollBarVisibility="Disabled"
+                     Padding="0,0,0,40">
             <ItemsControl ItemsSource="{Binding AlbumCategories}"
-                     Margin="40,0">
+                         Margin="40,0">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <!-- 单个分类容器 -->
                         <StackPanel Margin="0,20">
                             <!-- 分类标题 -->
                             <TextBlock Text="{Binding CategoryName}"
-                                  Style="{StaticResource SubtitleTextBlockStyle}"
-                                  Margin="0,0,0,15"/>
+                                     Style="{StaticResource SubtitleTextBlockStyle}"
+                                     Margin="0,0,0,10"/>
 
-                            <!-- 横向相册列表 -->
+                            <!-- 横向相册列表（包含创建按钮） -->
                             <ScrollViewer HorizontalScrollBarVisibility="Auto"
-                                     VerticalScrollBarVisibility="Disabled"
-                                     Height="220">
-                                <ItemsControl ItemsSource="{Binding Albums}">
-                                    <!-- 水平布局面板 -->
+                                         VerticalScrollBarVisibility="Disabled"
+                                         Height="280">
+                                <ItemsControl 
+                                    ItemsSource="{Binding Albums, 
+                                    Converter={StaticResource AppendButtonConverter},
+                                    ConverterParameter={Binding}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <StackPanel Orientation="Horizontal" Spacing="20"/>
                                         </ItemsPanelTemplate>
                                     </ItemsControl.ItemsPanel>
-
-                                    <!-- 相册项模板 -->
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid Width="280" Height="200">
-                                                <!-- 背景卡片 -->
-                                                <Border Background="{ThemeResource CardBackgroundFillColorDefault}"
-                                                   CornerRadius="8"
-                                                   Margin="0,0,0,10">
-                                                    <!-- 封面图片 -->
-                                                    <Image Source="{Binding Thumbnail}"
-                                                      Stretch="UniformToFill"
-                                                      Height="200"/>
-                                                </Border>
-
-                                                <!-- 相册信息 -->
-                                                <StackPanel VerticalAlignment="Bottom"
-                                                       Margin="12">
-                                                    <TextBlock Text="{Binding AlbumName}"
-                                                          Style="{StaticResource BodyStrongTextBlockStyle}"/>
-                                                    <TextBlock Text="{Binding PhotoCount}"
-                                                          Style="{StaticResource CaptionTextBlockStyle}"
-                                                          Foreground="{ThemeResource TextFillColorSecondary}"/>
-                                                </StackPanel>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
+                                    <ItemsControl.ItemTemplateSelector>
+                                        <converters:AlbumTemplateSelector
+                                            AlbumTemplate="{StaticResource AlbumItemTemplate}"
+                                            ButtonTemplate="{StaticResource CreateButtonTemplate}"/>
+                                    </ItemsControl.ItemTemplateSelector>
                                 </ItemsControl>
                             </ScrollViewer>
                         </StackPanel>

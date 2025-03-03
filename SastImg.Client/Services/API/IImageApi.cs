@@ -36,7 +36,8 @@ namespace SastImg.Client.Service.API
         /// </list>
         /// </returns>
         [Post("/api/albums/{albumId}/add")]
-        Task<IApiResponse> AddImageAsync(long albumId, [Body] Body2 body, CancellationToken cancellationToken = default);
+        [Multipart]
+        Task<IApiResponse> AddImageAsync([Query] long albumId,string title,StreamPart image,ICollection<long> tags,CancellationToken cancellationToken = default);
 
         /// <summary>Remove</summary>
         /// <remarks>Remove an image in the specific album.</remarks>
