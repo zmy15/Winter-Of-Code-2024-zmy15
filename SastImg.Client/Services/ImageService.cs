@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Refit;
+using SastImg.Client.Service.API;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -17,14 +19,26 @@ namespace SastImg.Client.Services
         private ICollection<long>? _tags;
         private DateTimeOffset _uploadedAt;
         private DateTimeOffset? _removedAt;
+        private string filePath;
 
-        public async Task<bool> GetImageThumbnail(long? id)
+        public async Task<bool> DownloadImage(long? id, int kind)
         {
             var localFolder = ApplicationData.Current.LocalFolder;
             if (id != null)
             {
-                string filePath = localFolder.Path + $"\\{id}.png";
-                var response = await App.API!.Image.GetImageAsync((long)id, 1);
+                if (kind == 1)
+                {
+                    filePath = localFolder.Path + $"\\{id}_Thumbnail.png";
+                }
+                else
+                {
+                    filePath = localFolder.Path + $"\\{id}.png";
+                }
+                if (File.Exists(filePath))
+                {
+                    return true;
+                }
+                var response = await App.API!.Image.GetImageAsync((long)id, kind);
                 if (response.IsSuccessStatusCode && response.Content != null)
                 {
                     // 创建文件流并写入从 API 获取的内容
@@ -40,6 +54,24 @@ namespace SastImg.Client.Services
         {
             var response = await App.API!.Image.RemoveImageAsync(_albumId, _id);
             return response.IsSuccessStatusCode;
+        }
+        public async Task<ICollection<ImageDto>> GetImagesByAlbum(long albumId)
+        {
+            var response = await App.API!.Image.GetImagesAsync(null, albumId, null);
+            if (response.Content != null)
+            {
+                return response.Content!;
+            }
+            return new List<ImageDto>();
+        }
+        public async Task<bool> UploadImageAsync(long albumId, string title,string filePath, ICollection<long> tags)
+        {
+            using (var imageStream = File.OpenRead(filePath))
+            {
+                var image = new StreamPart(imageStream, Path.GetFileName(filePath), "image/png");
+                var response = await App.API!.Image.AddImageAsync(albumId: albumId, title: title, image: image, tags: null);
+                return response.IsSuccessStatusCode;
+            }
         }
     }
 }

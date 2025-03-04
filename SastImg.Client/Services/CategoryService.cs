@@ -17,25 +17,7 @@ namespace SastImg.Client.Services
         public CategoryService() 
         { 
 
-        }
-        public async Task<ICollection<AlbumDto>> GetAlbumByCategories(long categoryId)
-        {
-            var response = await App.API!.Album.GetAlbumsAsync(categoryId, null, null);
-            if (response.Content != null)
-            {
-                return response.Content!;
-            }
-            return new List<AlbumDto>();
-        }
-        public async Task<ICollection<ImageDto>> GetImagesByAlbum(long albumId)
-        {
-            var response = await App.API!.Image.GetImagesAsync(null, albumId, null);
-            if (response.Content != null)
-            {
-                return response.Content!;
-            }
-            return new List<ImageDto>();
-        }
+        } 
         public async Task<List<AlbumCategory>> GetCategories()
         {
             AlbumCategories.Clear();
@@ -47,17 +29,17 @@ namespace SastImg.Client.Services
                 {
                     if (item != null)
                     {
-                        var AlbumInfo = await GetAlbumByCategories(item.Id);
+                        var AlbumInfo = await App.AlbumService.GetAlbumByCategories(item.Id);
                         var albumCollection = new ObservableCollection<Album>();
                         foreach (var album in AlbumInfo)
                         {
-                            var ImageInfo = await GetImagesByAlbum(album.Id);
+                            var ImageInfo = await App.ImageService.GetImagesByAlbum(album.Id);
                             var id = ImageInfo.FirstOrDefault()?.Id;
                             string filePath;
                             if (id != null)
                             {
-                                filePath = localFolder.Path + $"\\{id}.png";
-                                await App.ImageService.GetImageThumbnail(id);
+                                filePath = localFolder.Path + $"\\{id}_Thumbnail.png";
+                                await App.ImageService.DownloadImage(id, 1);
                             }
                             else
                             {
@@ -67,7 +49,8 @@ namespace SastImg.Client.Services
                             {
                                 AlbumName = album.Title,
                                 PhotoCount = ImageInfo.Count,
-                                Thumbnail = filePath
+                                Thumbnail = filePath,
+                                AlbumId = album.Id
                             });
                         }
                         var category = new AlbumCategory

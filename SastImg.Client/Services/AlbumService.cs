@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SastImg.Client.Service.API;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -29,11 +30,28 @@ namespace SastImg.Client.Services
                 var response = await App.API!.Album.CreateAlbumAsync(new() { Title = Title, Description = Description, CategoryId = CategoryId, AccessLevel = AccessLevelint });
                 return response.IsSuccessStatusCode;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
                 return false;
             }
+        }
+        public async Task<DetailedAlbum> GetAlbumDetail(long AlbumId)
+        {
+            var response = await App.API!.Album.GetDetailedAlbumAsync(AlbumId);
+            if (response.IsSuccessStatusCode) {
+                return response.Content!;
+            }
+            return new DetailedAlbum();
+        }
+        public async Task<ICollection<AlbumDto>> GetAlbumByCategories(long categoryId)
+        {
+            var response = await App.API!.Album.GetAlbumsAsync(categoryId, null, null);
+            if (response.Content != null)
+            {
+                return response.Content!;
+            }
+            return new List<AlbumDto>();
         }
     }
 }

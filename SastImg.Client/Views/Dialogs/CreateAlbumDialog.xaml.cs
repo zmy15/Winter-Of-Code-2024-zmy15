@@ -70,7 +70,6 @@ namespace SastImg.Client.Views.Dialogs
                 
                 if (await Services.AlbumService.CreateAlbumAsync(Title, Description, CategoryId, AccessLevel))
                 {
-                    // 对话框关闭后显示登陆成功弹窗
                     this.Closed += (ContentDialog sender, ContentDialogClosedEventArgs args) =>
                     {
                         if (args.Result is not ContentDialogResult.Primary)
@@ -86,7 +85,6 @@ namespace SastImg.Client.Views.Dialogs
                 }
                 else
                 {
-                    // 对话框关闭后显示登陆失败弹窗
                     this.Closed += (ContentDialog sender, ContentDialogClosedEventArgs args) =>
                     {
                         if (args.Result is not ContentDialogResult.Primary)
@@ -101,7 +99,7 @@ namespace SastImg.Client.Views.Dialogs
                     };
                 }
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 args.Cancel = true;
                 IsCreated = false;

@@ -27,6 +27,9 @@ namespace SastImg.Client.Views
         // 照片数量
         [ObservableProperty]
         private int _photoCount;
+
+        [ObservableProperty]
+        private long _albumId;
     }
 
     /// <summary>
@@ -48,10 +51,6 @@ namespace SastImg.Client.Views
         [ObservableProperty]
         public ObservableCollection<AlbumCategory> _albumCategories = new();
 
-        // 选中的相册（用于绑定）
-        [ObservableProperty]
-        private Album _selectedAlbum;
-
         [ObservableProperty]
         private bool _isLoading;
 
@@ -63,20 +62,24 @@ namespace SastImg.Client.Views
         public async Task InitializeAsync()
         {
             var categories = await App.CategoryService.GetCategories();
-            AlbumCategories.Clear();
             foreach (var c in categories)
             {
-                AlbumCategories.Add(c);
+                if (!AlbumCategories.Contains(c))
+                {
+                    AlbumCategories.Add(c);
+                }
             }
         }
         public ICommand CreateAlbumCommand => new RelayCommand<AlbumCategory>(async (category) =>
         {
             var dialog = new CreateAlbumDialog(category!.CategortId);
             await dialog.ShowAsync();
+            await InitializeAsync();
         });
-        public ICommand NavigateToAlbumDetailCommand => new RelayCommand<Album>(album =>
+
+        public ICommand NavigateToAlbumDetailCommand => new RelayCommand<Album>((album) =>
         {
-            
+            App.Shell!.MainFrame.Navigate(typeof(AlbumDetailView), album);
         });
     }
 }
