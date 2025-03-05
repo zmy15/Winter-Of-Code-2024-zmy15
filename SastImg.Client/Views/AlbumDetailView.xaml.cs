@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Navigation;
 using System;
@@ -37,10 +38,6 @@ namespace SastImg.Client.Views
             {
                 App.Shell.MainFrame.GoBack();
             }
-        }
-        private void GridView_ItemClick(object sender, RoutedEventArgs e)
-        {
-
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {

@@ -1,5 +1,6 @@
 ﻿using Refit;
 using SastImg.Client.Service.API;
+using SastImg.Client.Views;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -50,11 +51,6 @@ namespace SastImg.Client.Services
             }
             return false;
         }
-        public async Task<bool> RemoveImageAsync()
-        {
-            var response = await App.API!.Image.RemoveImageAsync(_albumId, _id);
-            return response.IsSuccessStatusCode;
-        }
         public async Task<ICollection<ImageDto>> GetImagesByAlbum(long albumId)
         {
             var response = await App.API!.Image.GetImagesAsync(null, albumId, null);
@@ -72,6 +68,30 @@ namespace SastImg.Client.Services
                 var response = await App.API!.Image.AddImageAsync(albumId: albumId, title: title, image: image, tags: null);
                 return response.IsSuccessStatusCode;
             }
+        }
+        public async Task<DetailedImage> GetDetailedImage(long ImageId)
+        {
+            var response = await App.API!.Image.GetDetailedImageAsync(ImageId);
+            if (response.Content != null)
+            {
+                return response.Content!;
+            }
+            return new DetailedImage();
+        }
+        public async Task<bool> RemoveImage(long albumId, long imageId)
+        {
+            var response = await App.API!.Image.RemoveImageAsync(albumId, imageId);
+            return response.IsSuccessStatusCode;
+        }
+        public async Task<bool> LikeImage(long albumId, long imageId)
+        {
+            var response = await App.API!.Image.LikeImageAsync(albumId, imageId);
+            return response.IsSuccessStatusCode;
+        }
+        public async Task<bool> UnlikeImage(long albumId, long imageId)
+        {
+            var response = await App.API!.Image.UnlikeImageAsync(albumId, imageId);
+            return response.IsSuccessStatusCode;
         }
     }
 }

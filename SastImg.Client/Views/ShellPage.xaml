@@ -37,6 +37,10 @@
                     Content="相册"
                     Icon="Pictures"
                     Tag="Album" />
+                <NavigationViewItem
+                    Content="回收站"
+                    Icon="Delete"
+                    Tag="Removed" />
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>
                 <NavigationViewItem

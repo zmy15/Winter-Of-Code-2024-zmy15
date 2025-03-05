@@ -38,6 +38,7 @@ namespace SastImg.Client.Views
     public class AlbumCategory : ObservableObject
     {
         public string CategoryName { get; set; }
+        public string CategoryDescription​ { get; set; }
         public ObservableCollection<Album> Albums { get; set; }
         public long CategortId { get; set; }
     }

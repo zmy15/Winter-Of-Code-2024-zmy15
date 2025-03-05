@@ -15,9 +15,17 @@
                 Margin="56,40"
                 Style="{ThemeResource TitleLargeTextBlockStyle}"
                 Text="SAST Image" />
-            <Button Content="112"
-                    Style="{ThemeResource EllipsisButton}"
-                    Command="{Binding GetImage}"/>
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,0,0,0" Background="Azure">
+                <TextBlock Text="已实现的功能：" FontSize="40"/>
+                <TextBlock Text="图片浏览" FontSize="36" Margin="0,20,0,0"/>
+                <TextBlock Text="上传图片" FontSize="36"/>
+                <TextBlock Text="创建相册" FontSize="36"/>
+                <TextBlock Text="修改相册信息" FontSize="36"/>
+                <TextBlock Text="注册账号" FontSize="36"/>
+                <TextBlock Text="删除相册" FontSize="36"/>
+                <TextBlock Text="删除图片" FontSize="36"/>
+                <TextBlock Text="点赞图片" FontSize="36"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

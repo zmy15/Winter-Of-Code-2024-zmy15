@@ -28,6 +28,9 @@ public sealed partial class ShellPage : Page
                 case "Album":
                     MainFrame.Navigate(typeof(AlbumView));
                     break;
+                case "Removed":
+                    MainFrame.Navigate(typeof(RemovedView));
+                    break;
                 case "Settings":
                     MainFrame.Navigate(typeof(SettingsView));
                     break;

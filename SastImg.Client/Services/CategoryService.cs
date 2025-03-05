@@ -57,6 +57,7 @@ namespace SastImg.Client.Services
                         {
                             CategoryName = item.Name,
                             CategortId = item.Id,
+                            CategoryDescription​ = item.Description,
                             Albums = albumCollection
                         };
                         AlbumCategories.Add(category);

@@ -31,6 +31,7 @@
                         <Border CornerRadius="8" Margin="0,0,0,10">
                             <Image Source="{Binding Thumbnail}"
                                 Stretch="Uniform"
+                                HorizontalAlignment="Center"
                                 Height="220"/>
                         </Border>
                         <StackPanel VerticalAlignment="Bottom" Margin="10,0,0,-0">
@@ -84,6 +85,7 @@
         <!-- 标题 -->
         <TextBlock Grid.Row="0"
                    Margin="40,20"
+                   FontSize="48"
                    Style="{ThemeResource TitleTextBlockStyle}"
                    Text="相册"/>
 
@@ -97,16 +99,20 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <!-- 单个分类容器 -->
-                        <StackPanel Margin="0,20">
+                        <StackPanel Margin="0,10">
                             <!-- 分类标题 -->
                             <TextBlock Text="{Binding CategoryName}"
                                      Style="{StaticResource SubtitleTextBlockStyle}"
-                                     Margin="0,0,0,10"/>
+                                     FontSize="28"
+                                     Margin="0,0,0,0"/>
+                            <TextBlock Text="{Binding CategoryDescription}"
+                                     FontSize="20"
+                                     Margin="0,0,0,5"/>
 
                             <!-- 横向相册列表（包含创建按钮） -->
                             <ScrollViewer HorizontalScrollBarVisibility="Auto"
                                          VerticalScrollBarVisibility="Disabled"
-                                         Height="280">
+                                         Height="250">
                                 <ItemsControl 
                                     ItemsSource="{Binding Albums, 
                                     Converter={StaticResource AppendButtonConverter},

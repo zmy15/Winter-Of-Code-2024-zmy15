@@ -16,12 +16,4 @@ public HomeViewModel()
     {
 
     }
-
-    private RelayCommand getImage;
-    public ICommand GetImage => getImage ??= new RelayCommand(PerformGetImage);
-
-    private async void PerformGetImage()
-    {
-        //await App.ImageService.GetImageThumbnail();
-    }
 }

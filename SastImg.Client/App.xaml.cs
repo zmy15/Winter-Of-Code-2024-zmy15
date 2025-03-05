@@ -40,4 +40,6 @@ public partial class App : Application
     public static AuthService AuthService = new();
     public static ImageService ImageService = new();
     public static CategoryService CategoryService = new();
+    public static AlbumService AlbumService = new();
+    public static TagService TagService = new();
 }

@@ -10,7 +10,7 @@ namespace SastImg.Client.Services
 {
     public class AlbumService
     {
-        public AlbumService() 
+        public AlbumService()
         {
 
         }
@@ -39,7 +39,8 @@ namespace SastImg.Client.Services
         public async Task<DetailedAlbum> GetAlbumDetail(long AlbumId)
         {
             var response = await App.API!.Album.GetDetailedAlbumAsync(AlbumId);
-            if (response.IsSuccessStatusCode) {
+            if (response.IsSuccessStatusCode)
+            {
                 return response.Content!;
             }
             return new DetailedAlbum();
@@ -53,5 +54,57 @@ namespace SastImg.Client.Services
             }
             return new List<AlbumDto>();
         }
+        public async Task<bool> UpdateAccessLevel​(long AlbumId, int AccessLevel)
+        {
+            var accessLevel = new UpdateAccessLevelRequest() { AccessLevel = AccessLevel };
+            var response = await App.API!.Album.UpdateAlbumAccessLevelAsync(AlbumId, accessLevel);
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            return false;
+        }
+        public async Task<bool> UpdateDescription​(long AlbumId, string Description)
+        {
+            var description = new UpdateDescriptionRequest() { Description = Description };
+            var response = await App.API!.Album.UpdateAlbumDescriptionAsync(AlbumId, description);
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            return false;
+        }
+        public async Task<bool> UpdateTitle​(long AlbumId, string Title)
+        {
+            var title = new UpdateTitleRequest() { Title = Title };
+            var response = await App.API!.Album.UpdateAlbumTitleAsync(AlbumId, title);
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            return false;
+        }
+        public async Task<bool> UpdateAlbumInfo(long AlbumId, int? AccessLevel, string? Description, string? Title)
+        {
+            if (AccessLevel != null)
+            {
+                await UpdateAccessLevel(AlbumId, (int)AccessLevel);
+            }
+            if (Description != null)
+            {
+                await UpdateDescription(AlbumId, Description);
+            }
+            if (Title != null)
+            {
+                await UpdateTitle(AlbumId, Title);
+            }
+            return true;
+        }
+        public async Task<bool> RemoveAlbum(long AlbumId)
+        {
+            var response = await App.API!.Album.RemoveAlbumAsync(AlbumId);
+            return response.IsSuccessStatusCode;
+        }
+
     }
 }
