@@ -5,7 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:SastImg.Client.Views"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DataContext="{d:DesignInstance Type=local:HomeViewModel}"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    d:DataContext="{d:DesignInstance Type=local:HomeViewModel}"
     Background="Transparent"
     mc:Ignorable="d">
 
@@ -26,6 +27,10 @@
                 <TextBlock Text="删除图片" FontSize="36"/>
                 <TextBlock Text="点赞图片" FontSize="36"/>
             </StackPanel>
+            <Button Content="清理缓存" Command="{Binding ClearCache}" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                    Margin="50,20,0,0" Height="80" Width="250" FontSize="36"/>
+            <TextBlock Text="{Binding Massage}" HorizontalAlignment="Left" Foreground="{Binding Color}"
+                       Margin="50,20,0,0" Height="80" Width="250" FontSize="36"/>
         </StackPanel>
     </Grid>
 </Page>
