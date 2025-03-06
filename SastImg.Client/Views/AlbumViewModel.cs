@@ -64,10 +64,7 @@ namespace SastImg.Client.Views
             var categories = await App.CategoryService.GetCategories();
             foreach (var c in categories)
             {
-                if (!AlbumCategories.Contains(c))
-                {
-                    AlbumCategories.Add(c);
-                }
+                AlbumCategories.Add(c);
             }
         }
         /// <summary>
@@ -77,6 +74,7 @@ namespace SastImg.Client.Views
         {
             var dialog = new CreateAlbumDialog(category!.CategortId);
             await dialog.ShowAsync();
+            AlbumCategories.Clear();
             await InitializeAsync();
         });
         /// <summary>
