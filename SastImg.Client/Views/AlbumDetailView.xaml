@@ -120,28 +120,30 @@
                     <Button x:Name="PickAPhotoButton" Content="选择图片" Width="120" Height="50" FontSize="24"
                         Command="{Binding PickPhotoCommand}" Margin="200,0,0,0"/>
                 </StackPanel>
-                <Image x:Name="UploadImage"
+                <StackPanel  Margin="0,-20,0,0">
+                    <Image x:Name="UploadImage"
                     Source="{Binding ImageSource}"
                     Stretch="Uniform" 
                     Height="200" 
                     Width="200"/>
-                <TextBlock Text="标题:" FontWeight="Bold" Margin="0,0,0,0" FontSize="18"/>
-                <TextBox Text="{Binding ImageTitle, Mode=TwoWay}" Height="40" FontSize="20" Margin="0,0,0,0"/>
-                <TextBlock Text="标签:" FontWeight="Bold" FontSize="16"/>
-                <StackPanel x:Name="OptionsStackPanel">
-                    <CheckBox Content="Select all" IsThreeState="True" IsChecked="{Binding IsAllChecked, Mode=TwoWay}" />
-                    <ItemsControl ItemsSource="{Binding Options}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}" Margin="24,0,0,0" />
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
-                <Button  Content="上传图片" Width="120" Height="50" FontSize="24" HorizontalAlignment="Center"
+                    <TextBlock Text="标题:" FontWeight="Bold" Margin="0,-10,0,0" FontSize="18"/>
+                    <TextBox Text="{Binding ImageTitle, Mode=TwoWay}" Height="40" FontSize="20" Margin="0,0,0,0"/>
+                    <TextBlock Text="标签:" FontWeight="Bold" FontSize="16"/>
+                    <StackPanel x:Name="OptionsStackPanel">
+                        <CheckBox Content="Select all" IsThreeState="True" IsChecked="{Binding IsAllChecked, Mode=TwoWay}" />
+                        <ItemsControl ItemsSource="{Binding Options}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}" Margin="24,0,0,0" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                    <Button  Content="上传图片" Width="120" Height="50" FontSize="24" HorizontalAlignment="Center"
                     Command="{Binding UploadImageCommand}"
                     CommandParameter="{Binding AlbumData}"/>
-                <TextBlock Text="{Binding Massage}" HorizontalAlignment="Center" Foreground="{Binding Color}"/>
+                    <TextBlock Text="{Binding Massage}" HorizontalAlignment="Center" Foreground="{Binding Color}" FontSize="18"/>
+                </StackPanel>
             </StackPanel>
         </Border>
 
