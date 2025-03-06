@@ -32,6 +32,7 @@ namespace SastImg.Client.Views
             InitializeComponent();
             DataContext = ViewModel;
         }
+        //·µ»Ø°´Å¥
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (App.Shell.MainFrame.CanGoBack)

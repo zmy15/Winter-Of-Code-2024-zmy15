@@ -16,13 +16,14 @@ namespace SastImg.Client.Views
     {
         public ImageViewModel()
         {
+            // 喜欢图片命令
             IncreaseLikesCommand = new RelayCommand(async () => {
                 if(await App.ImageService.LikeImage(ImageAlbumId,ImageData.ImageId))
                 {
                     Initialize();
                 }
             });
-
+            // 取消喜欢图片命令
             DecreaseLikesCommand = new RelayCommand(async () => {
                 if(await App.ImageService.UnlikeImage(ImageAlbumId, ImageData.ImageId))
                 {
@@ -81,6 +82,9 @@ namespace SastImg.Client.Views
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        /// <summary>
+        /// 初始化图片数据
+        /// </summary>
         public async void Initialize()
         {
             var detailedImage = await App.ImageService.GetDetailedImage(ImageData.ImageId);
@@ -106,6 +110,9 @@ namespace SastImg.Client.Views
                             .Aggregate((current, next) => string.IsNullOrEmpty(current) ? next : current + "," + next);
             }
         }
+        /// <summary>
+        /// 移除图片命令
+        /// </summary>
         public ICommand RemoveImage => new RelayCommand<ImageItem>(async imageItem =>
         {
             if(await App.ImageService.RemoveImage(ImageAlbumId,imageItem.ImageId) && App.Shell.MainFrame.CanGoBack)

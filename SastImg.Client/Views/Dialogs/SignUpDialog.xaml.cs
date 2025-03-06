@@ -58,7 +58,7 @@ public sealed partial class SignUpDialog : ContentDialog
             }
             if (await App.AuthService.SignUpAsync(Username, Password))
             {
-                // 对话框关闭后显示登陆成功弹窗
+                // 对话框关闭后显示注册成功弹窗
                 this.Closed += (ContentDialog sender, ContentDialogClosedEventArgs args) =>
                 {
                     if (args.Result is not ContentDialogResult.Primary)
@@ -74,7 +74,7 @@ public sealed partial class SignUpDialog : ContentDialog
             }
             else
             {
-                // 对话框关闭后显示登陆失败弹窗
+                // 对话框关闭后显示注册失败弹窗
                 this.Closed += (ContentDialog sender, ContentDialogClosedEventArgs args) =>
                 {
                     if (args.Result is not ContentDialogResult.Primary)

@@ -42,10 +42,6 @@ namespace SastImg.Client.Views
         public ObservableCollection<Album> Albums { get; set; }
         public long CategortId { get; set; }
     }
-
-    /// <summary>
-    /// 主视图模型（包含分类数据）
-    /// </summary>
     public partial class AlbumViewModel : ObservableObject
     {
         // 分类数据集合
@@ -59,7 +55,10 @@ namespace SastImg.Client.Views
         {
             InitializeAsync().ConfigureAwait(false);
         }
-
+        /// <summary>
+        /// 初始化分类相册数据
+        /// </summary>
+        /// <returns></returns>
         public async Task InitializeAsync()
         {
             var categories = await App.CategoryService.GetCategories();
@@ -71,13 +70,18 @@ namespace SastImg.Client.Views
                 }
             }
         }
+        /// <summary>
+        /// 创建相册命令
+        /// </summary>
         public ICommand CreateAlbumCommand => new RelayCommand<AlbumCategory>(async (category) =>
         {
             var dialog = new CreateAlbumDialog(category!.CategortId);
             await dialog.ShowAsync();
             await InitializeAsync();
         });
-
+        /// <summary>
+        /// 打开相册详情页命令
+        /// </summary>
         public ICommand NavigateToAlbumDetailCommand => new RelayCommand<Album>((album) =>
         {
             App.Shell!.MainFrame.Navigate(typeof(AlbumDetailView), album);

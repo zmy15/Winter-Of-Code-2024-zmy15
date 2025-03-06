@@ -87,7 +87,9 @@ namespace SastImg.Client.Views
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
+        /// <summary>
+        /// 初始化信息
+        /// </summary>
         public async void Initialize()
         {
             DetailedAlbums = await App.AlbumService.GetAlbumDetail(AlbumData.AlbumId);
@@ -163,7 +165,6 @@ namespace SastImg.Client.Views
                 IsAllChecked = null; // Indeterminate 状态
             }
         }
-
         private void SetAllOptionsCheckedState(bool? isChecked)
         {
             if (isChecked.HasValue)
@@ -174,10 +175,16 @@ namespace SastImg.Client.Views
                 }
             }
         }
+        /// <summary>
+        /// 将相册设置为编辑模式
+        /// </summary>
         public ICommand ChangeAlbum => new RelayCommand<Album>(_ =>
         {
             IsEditMode = true;
         });
+        /// <summary>
+        /// 确认修改相册信息
+        /// </summary>
         public ICommand ChangeAlbumConfirm => new RelayCommand<Album>(async album =>
         {
             IsEditMode = false;
@@ -192,6 +199,9 @@ namespace SastImg.Client.Views
             };
             await App.AlbumService.UpdateAlbumInfo(album.AlbumId,AccessLevelint,Description,Title);
         });
+        /// <summary>
+        /// 删除相册
+        /// </summary>
         public ICommand DeleteAlbum => new RelayCommand<Album>(async album =>
         {
             if (App.Shell.MainFrame.CanGoBack && await App.AlbumService.RemoveAlbum(album.AlbumId))
@@ -199,10 +209,16 @@ namespace SastImg.Client.Views
                 App.Shell.MainFrame.GoBack();
             }
         });
+        /// <summary>
+        /// 打开图片页面
+        /// </summary>
         public ICommand ImageViewCommand => new RelayCommand<ImageItem>(imageItem =>
         {
             App.Shell!.MainFrame.Navigate(typeof(ImageView), imageItem);
         });
+        /// <summary>
+        /// 选择上传的图片
+        /// </summary>
         public ICommand PickPhotoCommand => new RelayCommand<Album>(async _ =>
         {
             var openPicker = new FileOpenPicker
@@ -227,6 +243,9 @@ namespace SastImg.Client.Views
                 ImageSource = new BitmapImage(new Uri(file.Path));
             }
         });
+        /// <summary>
+        /// 上传图片
+        /// </summary>
         public ICommand UploadImageCommand => new RelayCommand<Album>(async (album) =>
         {
             ICollection<long> tagId = [];
@@ -258,7 +277,6 @@ namespace SastImg.Client.Views
         {
             return Images.Any(imageItem => imageItem.ImageUrl == imageUrl);
         }
-
         public async void CheckImageUrls(List<string> imageUrls)
         {
             foreach (var url in imageUrls)
@@ -277,6 +295,9 @@ namespace SastImg.Client.Views
             }
         }
     }
+    /// <summary>
+    /// 存储图片的Url和Id信息
+    /// </summary>
     public class ImageItem
     {
         public string ImageUrl { get; set; }

@@ -11,13 +11,20 @@ using Windows.Storage;
 
 namespace SastImg.Client.Services
 {
+    /// <summary>
+    /// 有关分类的服务
+    /// </summary>
     public class CategoryService
     {
         List<AlbumCategory> AlbumCategories = new();
         public CategoryService() 
         { 
 
-        } 
+        }
+        /// <summary>
+        /// 获取分类下的所有相册的信息
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<AlbumCategory>> GetCategories()
         {
             AlbumCategories.Clear();

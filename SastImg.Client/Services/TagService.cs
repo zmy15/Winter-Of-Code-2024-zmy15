@@ -7,12 +7,19 @@ using System.Threading.Tasks;
 
 namespace SastImg.Client.Services
 {
+    /// <summary>
+    /// 有关标签的服务
+    /// </summary>
     public class TagService
     {
         public TagService() 
         { 
 
         }
+        /// <summary>
+        /// 获取所有标签
+        /// </summary>
+        /// <returns></returns>
         public async Task<ICollection<TagDto>> GetTagsAsync()
         {
             var response = await App.API!.Tag.GetTagsAsync(null);
