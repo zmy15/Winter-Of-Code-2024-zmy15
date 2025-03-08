@@ -34,6 +34,16 @@ namespace SastImg.Client.Views
             this.InitializeComponent();
             this.DataContext = ViewModel;
         }
+        private void ScrollViewer_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
+        {
+            var scrollViewer = sender as ScrollViewer;
+            if (scrollViewer?.ScrollableWidth > 0)
+            {
+                // 获取鼠标滚轮的滚动增量（正值或负值）
+                var delta = e.GetCurrentPoint(scrollViewer).Properties.MouseWheelDelta;
+                scrollViewer.ChangeView(scrollViewer.HorizontalOffset - delta, null, null, true);
+                e.Handled = true;
+            }
+        }
     }
-
 }

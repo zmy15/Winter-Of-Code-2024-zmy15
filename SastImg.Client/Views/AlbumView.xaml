@@ -110,9 +110,11 @@
                                      Margin="0,0,0,5"/>
 
                             <!-- 横向相册列表（包含创建按钮） -->
-                            <ScrollViewer HorizontalScrollBarVisibility="Auto"
-                                         VerticalScrollBarVisibility="Disabled"
-                                         Height="250">
+                            <ScrollViewer x:Name="ScrollViewer"
+                                HorizontalScrollMode="Enabled"
+                                HorizontalScrollBarVisibility="Auto"
+                                VerticalScrollMode="Disabled"
+                                PointerWheelChanged="ScrollViewer_PointerWheelChanged">
                                 <ItemsControl 
                                     ItemsSource="{Binding Albums, 
                                     Converter={StaticResource AppendButtonConverter},
