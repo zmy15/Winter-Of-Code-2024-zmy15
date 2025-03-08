@@ -38,7 +38,7 @@ namespace SastImg.Client.Views
         [ObservableProperty]
         public long _imageId = 0;
         [ObservableProperty]
-        public long _imageuploaderId = 0;
+        public string _imageuploader = "";
         [ObservableProperty]
         public long _imageAlbumId = 0;
         [ObservableProperty]
@@ -96,7 +96,6 @@ namespace SastImg.Client.Views
             var tags = await App.TagService.GetTagsAsync();
             ImageTitle = detailedImage.Title;
             ImageId = detailedImage.Id;
-            ImageuploaderId = detailedImage.UploaderId;
             ImageAlbumId = detailedImage.AlbumId;
             ImageUploadedAt = detailedImage.UploadedAt;
             ImageLikes = detailedImage.Likes;
@@ -109,6 +108,9 @@ namespace SastImg.Client.Views
                             .DefaultIfEmpty(string.Empty)
                             .Aggregate((current, next) => string.IsNullOrEmpty(current) ? next : current + "," + next);
             }
+            var imageuploaderId = detailedImage.UploaderId;
+            var uploader = await App.UserService.GetProfile(imageuploaderId);
+            Imageuploader = uploader.Username;
         }
         /// <summary>
         /// 移除图片命令

@@ -42,4 +42,5 @@ public partial class App : Application
     public static CategoryService CategoryService = new();
     public static AlbumService AlbumService = new();
     public static TagService TagService = new();
+    public static UserService UserService = new();
 }
