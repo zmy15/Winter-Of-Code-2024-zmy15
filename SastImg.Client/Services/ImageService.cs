@@ -16,13 +16,6 @@ namespace SastImg.Client.Services
     /// </summary>
     public class ImageService
     {
-        private static long _id;
-        private long _uploaderId;
-        private long _albumId;
-        private string _title;
-        private ICollection<long>? _tags;
-        private DateTimeOffset _uploadedAt;
-        private DateTimeOffset? _removedAt;
         private string filePath;
 
         /// <summary>

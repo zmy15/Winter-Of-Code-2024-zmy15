@@ -24,7 +24,6 @@ namespace SastImg.Client.Services
         /// <summary>
         /// 获取分类下的所有相册的信息
         /// </summary>
-        /// <returns></returns>
         public async Task<List<AlbumCategory>> GetCategories()
         {
             AlbumCategories.Clear();
@@ -63,7 +62,7 @@ namespace SastImg.Client.Services
                         var category = new AlbumCategory
                         {
                             CategoryName = item.Name,
-                            CategortId = item.Id,
+                            CategoryId = item.Id,
                             CategoryDescription​ = item.Description,
                             Albums = albumCollection
                         };
